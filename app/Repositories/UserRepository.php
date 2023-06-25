@@ -16,6 +16,11 @@ class UserRepository
         return User::findOrFail($userId);
     }
 
+    public static function getUserByUsername($username)
+    {
+        return User::where('username', $username)->firstOrFail();
+    }
+
     public static function createUser($userData)
     {
         return User::create($userData);

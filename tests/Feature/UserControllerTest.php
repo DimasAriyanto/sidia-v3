@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
@@ -46,6 +47,7 @@ class UserControllerTest extends TestCase
         $this->assertDatabaseHas(User::class, [
             'username' => $data['username'],
         ]);
+        $this->assertTrue(Auth::attempt($data));
     }
 
     public function test_it_can_update_user(): void
