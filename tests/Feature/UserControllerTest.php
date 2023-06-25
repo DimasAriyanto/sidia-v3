@@ -32,4 +32,48 @@ class UserControllerTest extends TestCase
         $response = $this->get(route('dashboard.master.user.edit', ['id' => $user->id]));
         $response->assertViewIs('master.user.edit');
     }
+
+    public function test_it_can_store_user(): void
+    {
+        $data = [
+            'username' => 'test',
+            'password' => 'test',
+            'password_confirmation' => 'test',
+            'user_type' => 'admin',
+        ];
+        $response = $this->post(route('dashboard.master.user.store'), $data);
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseHas(User::class, [
+            'username' => $data['username'],
+        ]);
+    }
+
+    public function test_it_can_update_user(): void
+    {
+        $user = User::factory()->create();
+        $data = [
+            'username' => 'test',
+        ];
+        $this->assertDatabaseHas(User::class, [
+            'username' => $user->username,
+        ]);
+        $response = $this->put(route('dashboard.master.user.update', ['id' => $user->id]), $data);
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseHas(User::class, [
+            'username' => $data['username'],
+        ]);
+    }
+
+    public function test_it_can_delete_user(): void
+    {
+        $user = User::factory()->create();
+        $this->assertDatabaseHas(User::class, [
+            'id' => $user->id,
+        ]);
+        $response = $this->delete(route('dashboard.master.user.destroy', ['id' => $user->id]));
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseMissing(User::class, [
+            'id' => $user->id,
+        ]);
+    }
 }
