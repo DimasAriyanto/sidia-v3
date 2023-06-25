@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests\Transaksi;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -15,7 +11,7 @@ class UserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return false;
     }
 
     /**
@@ -25,18 +21,8 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'username' => 'string',
-            'password' => 'string|confirmed',
-            'no_hp' => 'numeric',
+        return [
+            //
         ];
-
-        if (Route::currentRouteName() === 'dashboard.master.user.store') {
-            $rules['username'] .= '|unique:users,username|required';
-            $rules['password'] .= '|required';
-            $rules['user_type'] = ['required', Rule::in(User::$USER_TYPE)];
-        }
-
-        return $rules;
     }
 }
