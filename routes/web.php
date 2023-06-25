@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\Transaksi\PemasukanController;
@@ -17,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('auth.show-login-form');
+Route::post('/login', [LoginController::class, 'postLogin'])->name('auth.post-login');
 
 Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(function () {
     Route::prefix('/master')->name('master.')->group(function () {
