@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'no_hp',
         'user_type',
+        'remember_token',
     ];
 
     /**
