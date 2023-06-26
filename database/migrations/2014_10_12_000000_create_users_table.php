@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_hp')->nullable();
             $table->enum('user_type', User::$USER_TYPE);
+            $table->string('remember_token')->nullable();
             $table->timestamps();
         });
     }
