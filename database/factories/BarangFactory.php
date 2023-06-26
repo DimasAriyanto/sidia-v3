@@ -20,10 +20,9 @@ class BarangFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->catchPhrase(),
-            'harga' => fake()->randomNumber(5, true),
-            'satuan' => 'Alat',
-            'stok' => 0,
+            'nama' => fake()->name(),
+            'satuan' => fake()->randomElement(['kilo', 'gram', 'liter', 'unit', 'lembar', 'batang', 'ekor']),
+            'stok' => fake()->numberBetween(0, 100),
         ];
     }
 }

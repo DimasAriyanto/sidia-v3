@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories\Contracts;
+namespace App\Services\Contracts;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-interface UserRepositoryInterface
+interface UserServiceInterface
 {
     public function create(array $data): User;
 
