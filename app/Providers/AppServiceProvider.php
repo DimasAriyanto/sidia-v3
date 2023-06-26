@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\UserRepository;
-use App\Repositories\UserRepositoryInterface;
 use App\Services\Contracts\UserServiceInterface;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;

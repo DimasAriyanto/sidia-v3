@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\UserRequest;
-use App\Repositories\UserRepository;
 use App\Services\Contracts\UserServiceInterface;
 use Exception;
 
@@ -12,20 +11,23 @@ class UserController extends Controller
 {
     protected $userService;
 
-    public function __construct(UserServiceInterface $userService) {
+    public function __construct(UserServiceInterface $userService)
+    {
         $this->userService = $userService;
     }
 
     public function index()
     {
         $user = $this->userService->getAll();
-        return view('master.user.index', compact($user));
+
+        return view('master.user.index', compact('user'));
     }
 
     public function show(int $id)
     {
         $user = $this->userService->getById($id);
-        return view('master.user.show', compact($user));
+
+        return view('master.user.show', compact('user'));
     }
 
     public function create()
@@ -36,7 +38,8 @@ class UserController extends Controller
     public function edit(int $id)
     {
         $user = $this->userService->getById($id);
-        return view('master.user.edit', compact($user));
+
+        return view('master.user.edit', compact('user'));
     }
 
     public function store(UserRequest $request)
