@@ -43,6 +43,6 @@ class UserService implements UserServiceInterface
 
     public function delete(int $id)
     {
-        $this->userRepository->delete($id);
+        return $this->userRepository->delete($id);
     }
 }

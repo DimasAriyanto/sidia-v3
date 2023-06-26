@@ -39,6 +39,7 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = $this->getById($id);
         $user -> delete();
+        return $user;
     }
 
     public static function countAll()

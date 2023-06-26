@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services\Contracts;
 
 use App\Models\Master\Barang;
 use Illuminate\Database\Eloquent\Collection;
 
-interface BarangRepositoryInterface
+interface BarangServiceInterface
 {
     public function getAll(): Collection;
 
