@@ -6,25 +6,42 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\BarangRequest;
 use App\Services\Contracts\BarangServiceInterface;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BarangController extends Controller
 {
     protected $barangService;
 
-    public function __construct(BarangServiceInterface $barangService) {
+    public function __construct(BarangServiceInterface $barangService)
+    {
         $this->barangService = $barangService;
     }
 
     public function index()
     {
         $barang = $this->barangService->getAll();
+
         return view('master.barang.index', compact('barang'));
     }
 
     public function show(int $id)
     {
-        $barang = $this->barangService->getById($id);
-        return view('master.barang.show', compact('barang'));
+        try {
+            $barang = $this->barangService->getById($id);
+            if (! $barang) {
+                throw new ModelNotFoundException('Barang tidak ditemukan');
+            }
+
+            return view('master.barang.show', compact('barang'));
+        } catch (ModelNotFoundException $e) {
+            return back()->withErrors([
+                'error' => 'Barang tidak ditemukan.',
+            ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
     public function create()
@@ -35,22 +52,24 @@ class BarangController extends Controller
     public function edit(int $id)
     {
         $barang = $this->barangService->getById($id);
+
         return view('master.barang.edit', compact('barang'));
     }
 
-    public function store(BarangRequest $request) {
+    public function store(BarangRequest $request)
+    {
         try {
             $data = $request->validated();
             $user = $this->barangService->create($data);
 
             return redirect()
-                -> back()
-                -> with('success', 'Barang berhasil ditambahkan');
+                ->back()
+                ->with('success', 'Barang berhasil ditambahkan');
         } catch (Exception $e) {
             return redirect()
-                -> back()
-                -> withErrors([
-                    'error' => 'Gagal menambahkan barang'
+                ->back()
+                ->withErrors([
+                    'error' => 'Gagal menambahkan barang',
                 ]);
         }
     }
@@ -87,7 +106,6 @@ class BarangController extends Controller
                 ->withErrors([
                     'error' => 'Gagal menghapus barang.',
                 ]);
-
         }
     }
 }

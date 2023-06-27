@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Master\Barang;
-use App\Repositories\BarangRepositoryInterface;
+use App\Repositories\Contracts\BarangRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class BarangRepository implements BarangRepositoryInterface
@@ -13,12 +13,12 @@ class BarangRepository implements BarangRepositoryInterface
         return Barang::all();
     }
 
-    public function getById(int $id): Barang
+    public function getById(int $id): Barang|null
     {
-        return Barang::findOrFail();
+        return Barang::find($id);
     }
 
-    public function getByName(string $name): Barang
+    public function getByName(string $name): Barang|null
     {
         return Barang::where('name', $name)->first();
     }
@@ -32,6 +32,7 @@ class BarangRepository implements BarangRepositoryInterface
     {
         $barang = $this->getById($id);
         $barang->update($data);
+
         return $barang;
     }
 
@@ -39,6 +40,7 @@ class BarangRepository implements BarangRepositoryInterface
     {
         $barang = $this->getById($id);
         $barang->delete();
+
         return $barang;
     }
 }

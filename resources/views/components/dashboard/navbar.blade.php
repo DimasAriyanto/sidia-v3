@@ -1,13 +1,9 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
-  <div class="container-fluid px-5 py-1">
-    <div class="d-flex">
-      <a class="navbar-brand fw-light" href="#">Always expand</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02"
-        aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <form role="search">
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+  <div class="container-fluid py-1">
+    <div class="d-flex align-items-center">
+      <i class="text-white fs-4 fa-solid fa-bars-staggered"></i>
+      <form role="search" class="mx-3">
+        <input class="form-control fw-light" type="search" placeholder="Search" aria-label="Search">
       </form>
 
     </div>

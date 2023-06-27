@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Master\Barang;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -24,12 +25,12 @@ class BarangControllerTest extends TestCase
         $response = $this->get(route('dashboard.master.barang.create'));
         $response->assertViewIs('master.barang.create');
 
-        $user = User::factory()->admin()->create();
+        $barang = Barang::factory()->create();
 
-        $response = $this->get(route('dashboard.master.barang.show', ['id' => $user->id]));
+        $response = $this->get(route('dashboard.master.barang.show', ['id' => $barang->id]));
         $response->assertViewIs('master.barang.show');
 
-        $response = $this->get(route('dashboard.master.barang.edit', ['id' => $user->id]));
+        $response = $this->get(route('dashboard.master.barang.edit', ['id' => $barang->id]));
         $response->assertViewIs('master.barang.edit');
     }
 }

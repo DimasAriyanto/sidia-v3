@@ -7,11 +7,12 @@ use App\Repositories\Contracts\SupplierRepositoryInterface;
 use App\Services\Contracts\SupplierServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-class SupplierServices implements SupplierServiceInterface
+class SupplierService implements SupplierServiceInterface
 {
     protected $supplierReposittory;
 
-    public function __construct(SupplierRepositoryInterface $supplierReposittory) {
+    public function __construct(SupplierRepositoryInterface $supplierReposittory)
+    {
         $this->supplierReposittory = $supplierReposittory;
     }
 
