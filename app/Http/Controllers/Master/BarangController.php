@@ -28,14 +28,11 @@ class BarangController extends Controller
     {
         try {
             $barang = $this->barangService->getById($id);
-            if (! $barang) {
-                throw new ModelNotFoundException('Barang tidak ditemukan');
-            }
 
             return view('master.barang.show', compact('barang'));
         } catch (ModelNotFoundException $e) {
             return back()->withErrors([
-                'error' => 'Barang tidak ditemukan.',
+                'error' => $e->getMessage(),
             ]);
         } catch (Exception $e) {
             return back()->withErrors([
