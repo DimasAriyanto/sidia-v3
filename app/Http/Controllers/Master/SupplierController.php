@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSupplierRequest;
-use App\Http\Requests\UpdateSupplierRequest;
-use App\Models\Master\Supplier;
+use App\Http\Requests\Master\StoreSupplierRequest;
+use App\Http\Requests\Master\UpdateSupplierRequest;
 use App\Services\Contracts\SupplierServiceInterface;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use PhpParser\Node\Stmt\TryCatch;
 
 class SupplierController extends Controller
@@ -62,9 +62,19 @@ class SupplierController extends Controller
      */
     public function show(int $id)
     {
-        $supplier =$this->supplierServices->getById($id);
+        try {
+            $supplier = $this->supplierServices->getById($id);
 
-        return view('', compact('supplier'));
+            return view('', compact('supplier'));
+        } catch (ModelNotFoundException $e) {
+            return back()->withErrors([
+                'error' => $e->getMessage(),
+            ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
     /**
@@ -84,16 +94,16 @@ class SupplierController extends Controller
     {
         try {
             $data = $request->validated();
-            $supplier = $this->supplierServices->update($id, $data);
+            $this->supplierServices->update($id, $data);
 
             return redirect()
                 ->back()
-                ->with('success', 'User berhasil diubah');
+                ->with('success', 'Supplier berhasil diubah');
         } catch (Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors([
-                    'error' => 'Gagal mengubah user.',
+                    'error' => 'Gagal mengubah supplier.',
                 ]);
         }
     }
@@ -101,8 +111,21 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $this->supplierServices->delete($id);
+
+            return redirect()
+                ->back()
+                ->with('success', 'Supplier berhasil dihapus');
+        } catch (Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' => 'Gagal menghapus supplier.',
+                ]);
+
+        }
     }
 }

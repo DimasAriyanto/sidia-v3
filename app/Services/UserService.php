@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Services\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserService implements UserServiceInterface
 {
@@ -23,12 +24,22 @@ class UserService implements UserServiceInterface
 
     public function getById(int $id): User
     {
-        return $this->userRepository->getById($id);
+        $user = $this->userRepository->getById($id);
+        if (! $user) {
+            throw new ModelNotFoundException('User dengan id '.$id.' tidak ditemukan');
+        }
+
+        return $user;
     }
 
     public function getByUsername(string $username): User
     {
-        return $this->userRepository->getByUsername($username);
+        $user = $this->userRepository->getByUsername($username);
+        if (! $user) {
+            throw new ModelNotFoundException('Barang dengan nama '.$username.' tidak ditemukan');
+        }
+
+        return $user;
     }
 
     public function create(array $data): User

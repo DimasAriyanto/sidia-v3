@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Transaksi\BarangRequest;
+use App\Http\Requests\Master\StoreBarangRequest;
+use App\Http\Requests\Master\UpdateBarangRequest;
 use App\Services\Contracts\BarangServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -53,11 +54,11 @@ class BarangController extends Controller
         return view('master.barang.edit', compact('barang'));
     }
 
-    public function store(BarangRequest $request)
+    public function store(StoreBarangRequest $request)
     {
         try {
             $data = $request->validated();
-            $user = $this->barangService->create($data);
+            $this->barangService->create($data);
 
             return redirect()
                 ->back()
@@ -71,11 +72,11 @@ class BarangController extends Controller
         }
     }
 
-    public function update(BarangRequest $request, int $id)
+    public function update(UpdateBarangRequest $request, int $id)
     {
         try {
             $data = $request->validated();
-            $barang = $this->barangService->update($id, $data);
+            $this->barangService->update($id, $data);
 
             return redirect()
                 ->back()

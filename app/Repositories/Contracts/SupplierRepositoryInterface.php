@@ -9,9 +9,9 @@ interface SupplierRepositoryInterface
 {
     public function getAll(): Collection;
 
-    public function getById(int $id): Supplier;
+    public function getById(int $id): Supplier|null;
 
-    public function getByName(string $name): Supplier;
+    public function getByName(string $name): Supplier|null;
 
     public function create(array $data): Supplier;
 

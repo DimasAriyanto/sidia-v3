@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Transaksi;
+namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PemasukanRequest extends FormRequest
+class UpdateBarangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class PemasukanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'sometimes|required|string',
+            'satuan' => 'sometimes|required|string',
+            'stok' => 'sometimes|required|integer',
         ];
     }
 }

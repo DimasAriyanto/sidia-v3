@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Master;
 
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Transaksi\UserRequest;
+use App\Http\Requests\Master\UserRequest;
 use App\Services\Contracts\UserServiceInterface;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -24,9 +25,22 @@ class UserController extends Controller
 
     public function show(int $id)
     {
-        $user = $this->userService->getById($id);
+        try {
+            $user = $this->userService->getById($id);
+            if (! $user) {
+                throw new ModelNotFoundException('User tidak ditemukan');
+            }
 
-        return view('master.user.show', compact('user'));
+            return view('master.user.show', compact('user'));
+        } catch (ModelNotFoundException $e) {
+            return back()->withErrors([
+                'error' => 'User tidak ditemukan.',
+            ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
     public function create()
@@ -45,7 +59,7 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->userService->create($data);
+            $this->userService->create($data);
 
             return redirect()
                 ->back()
@@ -63,7 +77,7 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->userService->update($id, $data);
+            $this->userService->update($id, $data);
 
             return redirect()
                 ->back()

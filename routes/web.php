@@ -5,8 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
-use App\Http\Controllers\Transaksi\PemasukanController;
-use App\Http\Controllers\Transaksi\PengeluaranController;
+use App\Http\Controllers\Transaksi\PembelianController;
+use App\Http\Controllers\Transaksi\PenjualanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,27 +69,27 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
     Route::prefix('/transaksi')->name('transaksi.')->group(function () {
         Route::prefix('/pemasukan')->name('pemasukan.')->group(function () {
             // View response routes
-            Route::get('/', [PemasukanController::class, 'index'])->name('index');
-            Route::get('/create', [PemasukanController::class, 'create'])->name('create');
-            Route::get('/{id}/show', [PemasukanController::class, 'show'])->name('show');
-            Route::get('/{id}/edit', [PemasukanController::class, 'edit'])->name('edit');
+            Route::get('/', [PembelianController::class, 'index'])->name('index');
+        Route::get('/create', [PembelianController::class, 'create'])->name('create');
+            Route::get('/{id}/show', [PembelianController::class, 'show'])->name('show');
+            Route::get('/{id}/edit', [PembelianController::class, 'edit'])->name('edit');
 
             // Action routes
-            Route::post('/', [PemasukanController::class, 'store'])->name('store');
-            Route::put('/{id}', [PemasukanController::class, 'update'])->name('update');
-            Route::delete('/{id}', [PemasukanController::class, 'destroy'])->name('destroy');
+            Route::post('/', [PembelianController::class, 'store'])->name('store');
+            Route::put('/{id}', [PembelianController::class, 'update'])->name('update');
+            Route::delete('/{id}', [PembelianController::class, 'destroy'])->name('destroy');
         });
         Route::prefix('/pengeluaran')->name('pengeluaran.')->group(function () {
             // View response routes
-            Route::get('/', [PengeluaranController::class, 'index'])->name('index');
-            Route::get('/create', [PengeluaranController::class, 'create'])->name('create');
-            Route::get('/{id}/show', [PengeluaranController::class, 'show'])->name('show');
-            Route::get('/{id}/edit', [PengeluaranController::class, 'edit'])->name('edit');
+            Route::get('/', [PenjualanController::class, 'index'])->name('index');
+            Route::get('/create', [PenjualanController::class, 'create'])->name('create');
+            Route::get('/{id}/show', [PenjualanController::class, 'show'])->name('show');
+            Route::get('/{id}/edit', [PenjualanController::class, 'edit'])->name('edit');
 
             // Action routes
-            Route::post('/', [PengeluaranController::class, 'store'])->name('store');
-            Route::put('/{id}', [PengeluaranController::class, 'update'])->name('update');
-            Route::delete('/{id}', [PengeluaranController::class, 'destroy'])->name('destroy');
+            Route::post('/', [PenjualanController::class, 'store'])->name('store');
+            Route::put('/{id}', [PenjualanController::class, 'update'])->name('update');
+            Route::delete('/{id}', [PenjualanController::class, 'destroy'])->name('destroy');
         });
     });
 });
