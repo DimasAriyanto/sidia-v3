@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\UserRequest;
 use App\Services\Contracts\UserServiceInterface;
@@ -16,11 +17,9 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $user = $this->userService->getAll();
-
-        return view('master.user.index', compact('user'));
+        return $dataTable->render('master.user.index');
     }
 
     public function show(int $id)

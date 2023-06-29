@@ -7,14 +7,19 @@
       </form>
 
     </div>
-    <div class="dropdown">
+    <div class="dropdown px-4">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
         data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-solid fa-gear"></i>
         <strong class="px-2">Settings</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li>
+          <form action="{{ route('auth.post-logout') }}" method="post">
+            @csrf
+            <button class="dropdown-item" type="submit">Sign out</button>
+          </form>
+        </li>
       </ul>
     </div>
   </div>
