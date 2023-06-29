@@ -21,7 +21,21 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', 'users.action');
+            ->addColumn('action', function (User $user) {
+                $detailHref = route('dashboard.master.user.show', ['id' => $user->id]);
+                $editHref = route('dashboard.master.user.edit', ['id' => $user->id]);
+                $deleteAction = route('dashboard.master.user.destroy', ['id' => $user->id]);
+                $methodDelete = method_field('delete');
+
+                return <<<EOL
+              <a href="$detailHref" class="btn btn-sm btn-info text-white">Detail</a>
+              <a href="$editHref" class="btn btn-sm btn-warning text-white">Edit</a>
+              <form action="$deleteAction" method="post" class="d-inline">
+                $methodDelete
+                <button type="submit" class="btn btn-sm btn-danger text-white">Delete</button>
+              </form>
+            EOL;
+            });
     }
 
     /**
