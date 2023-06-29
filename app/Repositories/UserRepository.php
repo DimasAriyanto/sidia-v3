@@ -13,12 +13,12 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function getById(int $id): User
+    public function getById(int $id): User|null
     {
-        return User::findOrFail($id);
+        return User::find($id);
     }
 
-    public function getByUsername(string $username): User
+    public function getByUsername(string $username): User|null
     {
         return User::where('username', $username)->first();
     }
@@ -38,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
     public function delete(int $id)
     {
         $user = $this->getById($id);
-        $user -> delete();
+        $user->delete();
         return $user;
     }
 

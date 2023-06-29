@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Transaksi;
+namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BarangRequest extends FormRequest
+class UpdateSupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,9 @@ class BarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string',
-            'satuan' => 'required|string',
-            'stok' => 'required|integer',
+            'nama' => 'sometimes|required|string',
+            'alamat' => 'sometimes|required|string',
+            'nomer_telepon' => 'sometimes|required|string',
         ];
     }
 }

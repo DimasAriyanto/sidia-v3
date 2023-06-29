@@ -4,7 +4,7 @@ namespace App\Http\Requests\Transaksi;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PengeluaranRequest extends FormRequest
+class StorePembelianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,13 @@ class PengeluaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tanggal_transaksi' => 'required|date',
+            'jenis_transaksi' => 'required|string',
+            'harga' => 'required|numeric',
+            'jumlah' => 'required|integer',
+            'barang_id' => 'required|exists:barang,id',
+            'user_id' => 'required|exists:users,id',
+            'supplier_id' => 'required|exists:supplier,id',
         ];
     }
 }

@@ -21,12 +21,12 @@ class UserService implements UserServiceInterface
         return $this->userRepository->getAll();
     }
 
-    public function getById(int $id): User
+    public function getById(int $id): User|null
     {
         return $this->userRepository->getById($id);
     }
 
-    public function getByUsername(string $username): User
+    public function getByUsername(string $username): User|null
     {
         return $this->userRepository->getByUsername($username);
     }

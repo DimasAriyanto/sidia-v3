@@ -13,14 +13,14 @@ class SupplierRepository implements SupplierRepositoryInterface
         return Supplier::all();
     }
 
-    public function getById(int $id): Supplier
+    public function getById(int $id): Supplier|null
     {
-        return Supplier::findOrFail($id);
+        return Supplier::find($id);
     }
 
-    public function getByName(string $name): Supplier
+    public function getByName(string $name): Supplier|null
     {
-        return Supplier::where('name', $name)->first();
+        return Supplier::where('nama', $name)->first();
     }
 
     public function create(array $data): Supplier

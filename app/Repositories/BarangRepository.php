@@ -20,7 +20,7 @@ class BarangRepository implements BarangRepositoryInterface
 
     public function getByName(string $name): Barang|null
     {
-        return Barang::where('name', $name)->first();
+        return Barang::where('nama', $name)->first();
     }
 
     public function create(array $data): Barang

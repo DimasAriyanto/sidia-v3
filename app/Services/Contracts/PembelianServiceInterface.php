@@ -2,18 +2,16 @@
 
 namespace App\Services\Contracts;
 
-use App\Models\User;
+use App\Models\Transaksi\Transaksi;
 use Illuminate\Database\Eloquent\Collection;
 
-interface UserServiceInterface
+interface PembelianServiceInterface
 {
-    public function create(array $data): User;
-
     public function getAll(): Collection;
 
-    public function getById(int $id): User|null;
+    public function getById(int $id): Transaksi|null;
 
-    public function getByUsername(string $username): User|null;
+    public function create(array $data): Transaksi;
 
     public function update(int $id, array $data);
 
