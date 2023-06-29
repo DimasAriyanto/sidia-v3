@@ -11,9 +11,9 @@ interface UserServiceInterface
 
     public function getAll(): Collection;
 
-    public function getById(int $id): User|null;
+    public function getById(int $id): User;
 
-    public function getByUsername(string $username): User|null;
+    public function getByUsername(string $username): User;
 
     public function update(int $id, array $data);
 

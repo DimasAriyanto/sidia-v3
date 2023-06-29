@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->userService->create($data);
+            $this->userService->create($data);
 
             return redirect()
                 ->back()
@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->userService->update($id, $data);
+            $this->userService->update($id, $data);
 
             return redirect()
                 ->back()

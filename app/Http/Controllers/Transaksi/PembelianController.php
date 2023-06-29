@@ -30,9 +30,6 @@ class PembelianController extends Controller
     {
         try {
             $pembelian = $this->pembelianService->getById($id);
-            if (! $pembelian) {
-                throw new ModelNotFoundException('Transaksi pembelian tidak ditemukan');
-            }
 
             return view('', compact('pembelian'));
         } catch (ModelNotFoundException $e) {
@@ -62,7 +59,7 @@ class PembelianController extends Controller
     {
         try {
             $data = $request->validated();
-            $pembelian = $this->pembelianService->create($data);
+            $this->pembelianService->create($data);
 
             return redirect()
                 ->back()
@@ -80,7 +77,7 @@ class PembelianController extends Controller
     {
         try {
             $data = $request->validated();
-            $pembelian = $this->pembelianService->update($id, $data);
+            $this->pembelianService->update($id, $data);
 
             return redirect()
                 ->back()

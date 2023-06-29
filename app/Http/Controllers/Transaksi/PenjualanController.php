@@ -30,9 +30,6 @@ class PenjualanController extends Controller
     {
         try {
             $penjualan = $this->penjualanService->getById($id);
-            if (! $penjualan) {
-                throw new ModelNotFoundException('Transaksi penjualan tidak ditemukan');
-            }
 
             return view('', compact('penjualan'));
         } catch (ModelNotFoundException $e) {
@@ -62,7 +59,7 @@ class PenjualanController extends Controller
     {
         try {
             $data = $request->validated();
-            $penjualan = $this->penjualanService->create($data);
+            $this->penjualanService->create($data);
 
             return redirect()
                 ->back()
@@ -80,7 +77,7 @@ class PenjualanController extends Controller
     {
         try {
             $data = $request->validated();
-            $penjualan = $this->penjualanService->update($id, $data);
+            $this->penjualanService->update($id, $data);
 
             return redirect()
                 ->back()

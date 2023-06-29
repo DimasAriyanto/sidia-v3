@@ -6,6 +6,7 @@ use App\Models\Master\Supplier;
 use App\Repositories\Contracts\SupplierRepositoryInterface;
 use App\Services\Contracts\SupplierServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SupplierService implements SupplierServiceInterface
 {
@@ -23,12 +24,22 @@ class SupplierService implements SupplierServiceInterface
 
     public function getById(int $id): Supplier
     {
-        return $this->supplierReposittory->getById($id);
+        $supplier = $this->supplierReposittory->getById($id);
+        if (!$supplier) {
+            throw new ModelNotFoundException('Supplier dengan id '.$id.' tidak ditemukan');
+        }
+
+        return $supplier;
     }
 
     public function getByName(string $name): Supplier
     {
-        return $this->supplierReposittory->getByName($name);
+        $supplier = $this->supplierReposittory->getByName($name);;
+        if (! $supplier) {
+            throw new ModelNotFoundException('Supplier dengan nama '.$name.' tidak ditemukan');
+        }
+
+        return $supplier;
     }
 
     public function create(array $data): Supplier

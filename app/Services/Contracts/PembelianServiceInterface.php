@@ -9,7 +9,7 @@ interface PembelianServiceInterface
 {
     public function getAll(): Collection;
 
-    public function getById(int $id): Transaksi|null;
+    public function getById(int $id): Transaksi;
 
     public function create(array $data): Transaksi;
 

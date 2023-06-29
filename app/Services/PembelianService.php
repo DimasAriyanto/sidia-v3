@@ -6,6 +6,7 @@ use App\Models\Transaksi\Transaksi;
 use App\Repositories\Contracts\TransaksiRepositoryInterface;
 use App\Services\Contracts\PembelianServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class PembelianService implements PembelianServiceInterface
@@ -22,9 +23,14 @@ class PembelianService implements PembelianServiceInterface
         return $this->transaksiRepository->getAllByJenisTransaksi('pembelian');
     }
 
-    public function getById(int $id): Transaksi|null
+    public function getById(int $id): Transaksi
     {
-        return $this->transaksiRepository->getById($id);
+        $pembelian = $this->transaksiRepository->getById($id);
+        if (!$pembelian) {
+            throw new ModelNotFoundException('Transaksi pembelian dengan id '.$id.' tidak ditemukan');
+        }
+
+        return $pembelian;
     }
 
     public function create(array $data): Transaksi

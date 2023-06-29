@@ -58,7 +58,7 @@ class BarangController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->barangService->create($data);
+            $this->barangService->create($data);
 
             return redirect()
                 ->back()
@@ -76,7 +76,7 @@ class BarangController extends Controller
     {
         try {
             $data = $request->validated();
-            $barang = $this->barangService->update($id, $data);
+            $this->barangService->update($id, $data);
 
             return redirect()
                 ->back()
