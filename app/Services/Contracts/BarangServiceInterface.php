@@ -9,9 +9,9 @@ interface BarangServiceInterface
 {
     public function getAll(): Collection;
 
-    public function getById(int $id): Barang|null;
+    public function getById(int $id): Barang;
 
-    public function getByName(string $name): Barang|null;
+    public function getByName(string $name): Barang;
 
     public function create(array $data): Barang;
 

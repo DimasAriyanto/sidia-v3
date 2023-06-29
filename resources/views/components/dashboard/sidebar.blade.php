@@ -4,41 +4,32 @@
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <li>
-      <a href="#" class="nav-link text-white">
-        <i class="fa-solid fa-home"></i>
-        <span class="px-2">Dashboard</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-white collapsed" data-bs-toggle="collapse"
-        data-bs-target="#master-collapse" aria-expanded="false">
-        <i class="fa-solid fa-layer-group"></i>
-        <span class="px-2">Master</span>
-        <i class="fa-solid fa-angle-down float-end mt-1"></i>
-      </a>
-      <div class="collapse px-4 pw-2" id="master-collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-light small">
-          <li><a href="#" class="nav-link text-white">Pengguna</a></li>
-          <li><a href="#" class="nav-link text-white">Barang</a></li>
-          <li><a href="#" class="nav-link text-white">Supplier</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-white collapsed" data-bs-toggle="collapse"
-        data-bs-target="#transaksi-collapse" aria-expanded="false">
-        <i class="fa-solid fa-table"></i>
-        <span class="px-2">Transaksi</span>
-        <i class="fa-solid fa-angle-down float-end mt-1"></i>
-      </a>
-      <div class="collapse px-4 pw-2" id="transaksi-collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-light small">
-          <li><a href="#" class="nav-link text-white">Pemasukan</a></li>
-          <li><a href="#" class="nav-link text-white">Pengeluaran</a></li>
-        </ul>
-      </div>
-    </li>
+    @foreach ($menu as $m)
+      @if (!isset($m['child']))
+        <li class="nav-item">
+          <a href="{{ $m['route'] }}" class="nav-link text-white">
+            <i class="{{ $m['icon'] }}"></i>
+            <span class="px-2">{{ $m['name'] }}</span>
+          </a>
+        </li>
+      @else
+        <li class="nav-item">
+          <a href="{{ $m['route'] }}" class="nav-link text-white collapsed" data-bs-toggle="collapse"
+            data-bs-target="#{{ $m['name'] }}-collapse" aria-expanded="false">
+            <i class="{{ $m['icon'] }}"></i>
+            <span class="px-2">{{ $m['name'] }}</span>
+            <i class="fa-solid fa-angle-down float-end mt-1"></i>
+          </a>
+          <div class="collapse px-4 pw-2" id="{{ $m['name'] }}-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-light small">
+              @foreach ($m['child'] as $child)
+                <li><a href="{{ $child['route'] }}" class="nav-link text-white">{{ $child['name'] }}</a></li>
+              @endforeach
+            </ul>
+          </div>
+        </li>
+      @endif
+    @endforeach
   </ul>
   <hr>
   <small class="fw-lighter">SIDIA | Sistem Persediaan Barang</small>

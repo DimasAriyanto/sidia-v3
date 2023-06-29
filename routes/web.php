@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
+use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\Transaksi\PembelianController;
 use App\Http\Controllers\Transaksi\PenjualanController;
@@ -50,6 +51,18 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
             Route::post('/', [BarangController::class, 'store'])->name('store');
             Route::put('/{id}', [BarangController::class, 'update'])->name('update');
             Route::delete('/{id}', [BarangController::class, 'destroy'])->name('destroy');
+        });
+        Route::prefix('/supplier')->name('supplier.')->group(function () {
+            // View response routes
+            Route::get('/', [SupplierController::class, 'index'])->name('index');
+            Route::get('/create', [SupplierController::class, 'create'])->name('create');
+            Route::get('/{id}/show', [SupplierController::class, 'show'])->name('show');
+            Route::get('/{id}/edit', [SupplierController::class, 'edit'])->name('edit');
+
+            // Action routes
+            Route::post('/', [SupplierController::class, 'store'])->name('store');
+            Route::put('/{id}', [SupplierController::class, 'update'])->name('update');
+            Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('destroy');
         });
     });
 

@@ -6,6 +6,7 @@ use App\Models\Master\Barang;
 use App\Repositories\Contracts\BarangRepositoryInterface;
 use App\Services\Contracts\BarangServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BarangService implements BarangServiceInterface
 {
@@ -21,14 +22,24 @@ class BarangService implements BarangServiceInterface
         return $this->barangRepository->getAll();
     }
 
-    public function getById(int $id): Barang|null
+    public function getById(int $id): Barang
     {
-        return $this->barangRepository->getById($id);
+        $barang = $this->barangRepository->getById($id);
+        if (! $barang) {
+            throw new ModelNotFoundException('Barang dengan id '.$id.' tidak ditemukan');
+        }
+
+        return $barang;
     }
 
-    public function getByName(string $name): Barang|null
+    public function getByName(string $name): Barang
     {
-        return $this->barangRepository->getByName($name);
+        $barang = $this->barangRepository->getByName($name);
+        if (! $barang) {
+            throw new ModelNotFoundException('Barang dengan nama '.$name.' tidak ditemukan');
+        }
+
+        return $barang;
     }
 
     public function create(array $data): Barang
