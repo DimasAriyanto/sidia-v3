@@ -8,6 +8,8 @@ use Illuminate\View\Component;
 
 class Layout extends Component
 {
+    public $title = 'Dashboard';
+
     /**
      * Create a new component instance.
      */

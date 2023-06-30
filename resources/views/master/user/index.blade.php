@@ -1,4 +1,7 @@
 <x-dashboard.layout>
+  <x-slot:title>
+    Manage Users
+  </x-slot>
   <x-dashboard.breadcrumb />
   <div class="card">
     <div class="card-header bg-dark text-light fw-bold">Manage Users</div>

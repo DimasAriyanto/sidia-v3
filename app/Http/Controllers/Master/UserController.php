@@ -21,15 +21,18 @@ class UserController extends Controller
 
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('master.user.index');
+        $title = 'Manage Users';
+
+        return $dataTable->render('master.user.index', compact('title'));
     }
 
     public function show(int $id)
     {
         try {
+            $title = 'Detail User';
             $user = $this->userService->getById($id);
 
-            return view('master.user.show', compact('user'));
+            return view('master.user.show', compact('user', 'title'));
         } catch (ModelNotFoundException $e) {
             return redirect()
                 ->route('dashboard.master.user.index')
@@ -45,18 +48,20 @@ class UserController extends Controller
 
     public function create()
     {
+        $title = 'Create User';
         $types = $this->userService->getMappedUserTypes();
 
-        return view('master.user.create', compact('types'));
+        return view('master.user.create', compact('types', 'title'));
     }
 
     public function edit(int $id)
     {
         try {
+            $title = 'Edit User';
             $user = $this->userService->getById($id);
             $types = $this->userService->getMappedUserTypes();
 
-            return view('master.user.edit', compact('user', 'types'));
+            return view('master.user.edit', compact('user', 'types', 'title'));
         } catch (ModelNotFoundException $e) {
             return redirect()
                 ->route('dashboard.master.user.index')

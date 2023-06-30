@@ -1,12 +1,16 @@
 <x-dashboard.layout>
+  <x-slot:title>
+    Detail User
+  </x-slot>
   <x-dashboard.breadcrumb />
   <div class="card">
-    <div class="card-header bg-dark text-light fw-bold">User Detail</div>
+    <div class="card-header bg-dark text-light fw-bold">Detail User</div>
     <div class="card-body">
       <form>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="username" readonly class="form-control" id="username" aria-describedby="username-help" value="{{ $user->username }}">
+          <input type="username" readonly class="form-control" id="username" aria-describedby="username-help"
+            value="{{ $user->username }}">
           <div id="username-help" class="form-text">Never share your username with anyone else.</div>
         </div>
         <div class="mb-3">

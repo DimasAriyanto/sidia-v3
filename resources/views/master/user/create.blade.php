@@ -1,7 +1,10 @@
 <x-dashboard.layout>
+  <x-slot:title>
+    Edit User 
+  </x-slot>
   <x-dashboard.breadcrumb />
   <div class="card">
-    <div class="card-header bg-dark text-light fw-bold">User Detail</div>
+    <div class="card-header bg-dark text-light fw-bold">Create User</div>
     <div class="card-body">
       @error('error')
         <div class="mt-2 alert alert-danger">{{ $message }}</div>
