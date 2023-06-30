@@ -16,7 +16,7 @@ class Supplier extends Model
     protected $fillable = [
         'nama',
         'alamat',
-        'nomor_telepon',
+        'nomer_telepon',
     ];
 
     protected static function newFactory(): Factory
