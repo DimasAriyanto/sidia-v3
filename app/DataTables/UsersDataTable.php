@@ -29,12 +29,21 @@ class UsersDataTable extends DataTable
                 $csrf = csrf_field();
 
                 return <<<EOL
-              <a href="$detailHref" class="btn btn-sm btn-info text-white">Detail</a>
-              <a href="$editHref" class="btn btn-sm btn-warning text-white">Edit</a>
+              <a href="$detailHref" class="btn btn-sm btn-info text-white">
+                <i class="fa-solid fa-circle-info"></i>
+                Detail
+              </a>
+              <a href="$editHref" class="btn btn-sm btn-warning text-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit
+              </a>
               <form action="$deleteAction" method="post" class="d-inline">
                 $csrf
                 $methodDelete
-                <button type="submit" class="btn btn-sm btn-danger text-white">Delete</button>
+                <button type="submit" class="btn btn-sm btn-danger text-white">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete
+                </button>
               </form>
             EOL;
             });

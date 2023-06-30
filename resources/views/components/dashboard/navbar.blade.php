@@ -10,8 +10,8 @@
     <div class="dropdown px-4">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
         data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-gear"></i>
-        <strong class="px-2">Settings</strong>
+        <i class="fa-solid fa-user"></i>
+        <strong class="px-2">{{ $user->nama }}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li>

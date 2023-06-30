@@ -4,15 +4,19 @@ namespace App\View\Components\Dashboard;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Navbar extends Component
 {
+    public $user;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
+        $this->user = Auth::user();
         //
     }
 

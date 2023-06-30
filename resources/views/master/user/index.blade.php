@@ -12,7 +12,10 @@
       @if (session()->has('success'))
         <div class="mt-2 alert alert-success">{{ session('success') }}</div>
       @endif
-      <a href="{{ route('dashboard.master.user.create') }}" class="btn btn-sm btn-primary mb-3">Tambah</a>
+      <a href="{{ route('dashboard.master.user.create') }}" class="btn btn-sm btn-primary mb-3">
+        <i class="fa-solid fa-plus"></i>
+        Tambah
+      </a>
       {!! $dataTable->table(['class' => 'table table-bordered']) !!}
     </div>
   </div>
