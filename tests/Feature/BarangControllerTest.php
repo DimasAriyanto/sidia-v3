@@ -33,4 +33,52 @@ class BarangControllerTest extends TestCase
         $response = $this->get(route('dashboard.master.barang.edit', ['id' => $barang->id]));
         $response->assertViewIs('master.barang.edit');
     }
+
+    public function test_it_can_store_barang(): void
+    {
+        $data = [
+            'nama' => 'Pensil 2B',
+            'satuan' => 'Biji',
+        ];
+        $response = $this->post(route('dashboard.master.barang.store'), $data);
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseHas(Barang::class, [
+            'nama' => $data['nama'],
+            'satuan' => $data['satuan'],
+        ]);
+    }
+
+    public function test_it_can_update_barang(): void
+    {
+        $barang = Barang::factory()->create();
+        $data = [
+            'nama' => 'updated',
+            'satuan' => 'updated',
+        ];
+        $this->assertDatabaseHas(Barang::class, [
+            'id' => $barang->id,
+            'nama' => $barang->nama,
+            'satuan' => $barang->satuan,
+        ]);
+        $response = $this->put(route('dashboard.master.barang.update', ['id' => $barang->id]), $data);
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseHas(Barang::class, [
+            'id' => $barang->id,
+            'nama' => $data['nama'],
+            'satuan' => $data['satuan'],
+        ]);
+    }
+
+    public function test_it_can_delete_barang(): void
+    {
+        $barang = Barang::factory()->create();
+        $this->assertDatabaseHas(Barang::class, [
+            'id' => $barang->id,
+        ]);
+        $response = $this->delete(route('dashboard.master.barang.destroy', ['id' => $barang->id]));
+        $response->assertSessionDoesntHaveErrors();
+        $this->assertDatabaseMissing(Barang::class, [
+            'id' => $barang->id,
+        ]);
+    }
 }

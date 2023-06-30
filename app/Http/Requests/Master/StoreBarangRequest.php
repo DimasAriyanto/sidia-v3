@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreBarangRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreBarangRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,6 @@ class StoreBarangRequest extends FormRequest
         return [
             'nama' => 'required|string',
             'satuan' => 'required|string',
-            'stok' => 'required|integer',
         ];
     }
 }
