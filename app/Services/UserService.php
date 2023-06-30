@@ -42,6 +42,16 @@ class UserService implements UserServiceInterface
         return $user;
     }
 
+    public function getMappedUserTypes(): array
+    {
+        return collect(User::$USER_TYPE)->map(function ($type) {
+            return [
+                'value' => $type,
+                'name' => ucfirst($type),
+            ];
+        })->toArray();
+    }
+
     public function create(array $data): User
     {
         return $this->userRepository->create($data);

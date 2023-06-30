@@ -5,10 +5,9 @@ namespace App\Http\Requests\Master;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,18 +24,12 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'username' => 'string',
-            'password' => 'string|confirmed',
+        return [
+            'username' => 'required|string',
+            'nama' => 'string',
+            'password' => 'required|string|confirmed',
             'no_hp' => 'numeric',
+            'user_type' => ['required', Rule::in(User::$USER_TYPE)],
         ];
-
-        if (Route::currentRouteName() === 'dashboard.master.user.store') {
-            $rules['username'] .= '|unique:users,username|required';
-            $rules['password'] .= '|required';
-            $rules['user_type'] = ['required', Rule::in(User::$USER_TYPE)];
-        }
-
-        return $rules;
     }
 }

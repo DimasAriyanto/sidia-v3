@@ -26,11 +26,13 @@ class UsersDataTable extends DataTable
                 $editHref = route('dashboard.master.user.edit', ['id' => $user->id]);
                 $deleteAction = route('dashboard.master.user.destroy', ['id' => $user->id]);
                 $methodDelete = method_field('delete');
+                $csrf = csrf_field();
 
                 return <<<EOL
               <a href="$detailHref" class="btn btn-sm btn-info text-white">Detail</a>
               <a href="$editHref" class="btn btn-sm btn-warning text-white">Edit</a>
               <form action="$deleteAction" method="post" class="d-inline">
+                $csrf
                 $methodDelete
                 <button type="submit" class="btn btn-sm btn-danger text-white">Delete</button>
               </form>

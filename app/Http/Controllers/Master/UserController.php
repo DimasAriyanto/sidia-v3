@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Master;
 
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\UserRequest;
+use App\Http\Requests\Master\StoreUserRequest;
+use App\Http\Requests\Master\UpdateUserRequest;
 use App\Services\Contracts\UserServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -27,15 +28,14 @@ class UserController extends Controller
     {
         try {
             $user = $this->userService->getById($id);
-            if (! $user) {
-                throw new ModelNotFoundException('User tidak ditemukan');
-            }
 
             return view('master.user.show', compact('user'));
         } catch (ModelNotFoundException $e) {
-            return back()->withErrors([
-                'error' => 'User tidak ditemukan.',
-            ]);
+            return redirect()
+                ->route('dashboard.master.user.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return back()->withErrors([
                 'error' => 'Ada masalah saat membuka halaman!',
@@ -45,17 +45,32 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('master.user.create');
+        $types = $this->userService->getMappedUserTypes();
+
+        return view('master.user.create', compact('types'));
     }
 
     public function edit(int $id)
     {
-        $user = $this->userService->getById($id);
+        try {
+            $user = $this->userService->getById($id);
+            $types = $this->userService->getMappedUserTypes();
 
-        return view('master.user.edit', compact('user'));
+            return view('master.user.edit', compact('user', 'types'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.user.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
-    public function store(UserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         try {
             $data = $request->validated();
@@ -73,20 +88,29 @@ class UserController extends Controller
         }
     }
 
-    public function update(UserRequest $request, int $id)
+    public function update(UpdateUserRequest $request, int $id)
     {
         try {
             $data = $request->validated();
+            if (empty($data['password'])) {
+                unset($data['password']);
+            }
             $this->userService->update($id, $data);
 
             return redirect()
                 ->back()
                 ->with('success', 'User berhasil diubah');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.user.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors([
-                    'error' => 'Gagal mengubah user.',
+                    'error' => $e->getMessage(),
                 ]);
         }
     }
@@ -99,13 +123,18 @@ class UserController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'User berhasil dihapus');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.user.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors([
                     'error' => 'Gagal menghapus user.',
                 ]);
-
         }
     }
 }

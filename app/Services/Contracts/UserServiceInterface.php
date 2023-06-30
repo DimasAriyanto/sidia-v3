@@ -15,6 +15,8 @@ interface UserServiceInterface
 
     public function getByUsername(string $username): User;
 
+    public function getMappedUserTypes(): array;
+
     public function update(int $id, array $data);
 
     public function delete(int $id);
