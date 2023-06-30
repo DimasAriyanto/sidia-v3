@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ env('APP_NAME') }} | Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
   <style>
     .login-container {
       height: 100vh;
@@ -29,7 +28,7 @@
       top: 0;
       left: 0;
       content: "";
-      background-image: url('https://miro.medium.com/v2/resize:fit:1440/format:webp/1*SHTjic9tOhTFGSco7USwIQ.jpeg');
+      background-image: url('{{ asset('background/login.jpg') }}');
       background-size: cover;
       background-position: center;
     }
@@ -94,7 +93,8 @@
         </div>
         <div class="form-check mb-3">
           <input type="checkbox" class="form-check-input" id="remember-me" name="remember_me">
-          <label class="fw-light" class="form-check-label text-secondary font-weight-light" for="remember-me">Remember me</label>
+          <label class="fw-light" class="form-check-label text-secondary font-weight-light" for="remember-me">Remember
+            me</label>
         </div>
         <button type="submit" class="mb-3 form-control fw-light btn btn-primary">Login</button>
       </form>
