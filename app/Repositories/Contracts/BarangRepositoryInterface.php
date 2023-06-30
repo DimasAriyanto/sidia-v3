@@ -15,7 +15,7 @@ interface BarangRepositoryInterface
 
     public function create(array $data): Barang;
 
-    public function update(int $id, array $data);
+    public function update(Barang $barang, array $data);
 
-    public function delete(int $id);
+    public function delete(Barang $barang);
 }

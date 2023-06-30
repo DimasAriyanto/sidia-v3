@@ -15,7 +15,7 @@ interface UserRepositoryInterface
 
     public function create(array $data): User;
 
-    public function update(int $id, array $data);
+    public function update(User $user, array $data);
 
-    public function delete(int $id);
+    public function delete(User $user);
 }

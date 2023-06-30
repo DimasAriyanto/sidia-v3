@@ -59,11 +59,15 @@ class UserService implements UserServiceInterface
 
     public function update(int $id, array $data)
     {
-        return $this->userRepository->update($id, $data);
+        $user = $this->getById($id);
+
+        return $this->userRepository->update($user, $data);
     }
 
     public function delete(int $id)
     {
-        return $this->userRepository->delete($id);
+        $user = $this->getById($id);
+
+        return $this->userRepository->delete($user);
     }
 }

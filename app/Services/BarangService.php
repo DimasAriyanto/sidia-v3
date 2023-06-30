@@ -49,11 +49,15 @@ class BarangService implements BarangServiceInterface
 
     public function update(int $id, array $data)
     {
-        return $this->barangRepository->update($id, $data);
+        $barang = $this->getById($id);
+
+        return $this->barangRepository->update($barang, $data);
     }
 
     public function delete(int $id)
     {
-        return $this->barangRepository->delete($id);
+        $barang = $this->getById($id);
+
+        return $this->barangRepository->delete($barang);
     }
 }

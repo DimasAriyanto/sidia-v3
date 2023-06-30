@@ -32,9 +32,11 @@ class BarangController extends Controller
 
             return view('master.barang.show', compact('barang'));
         } catch (ModelNotFoundException $e) {
-            return back()->withErrors([
-                'error' => $e->getMessage(),
-            ]);
+            return redirect()
+                ->route('dashboard.master.barang.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return back()->withErrors([
                 'error' => 'Ada masalah saat membuka halaman!',
@@ -49,9 +51,22 @@ class BarangController extends Controller
 
     public function edit(int $id)
     {
-        $barang = $this->barangService->getById($id);
+        try {
 
-        return view('master.barang.edit', compact('barang'));
+            $barang = $this->barangService->getById($id);
+
+            return view('master.barang.edit', compact('barang'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.barang.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
     public function store(StoreBarangRequest $request)
@@ -63,6 +78,12 @@ class BarangController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Barang berhasil ditambahkan');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.barang.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
@@ -81,6 +102,12 @@ class BarangController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Barang berhasil diubah');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.barang.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
@@ -98,6 +125,12 @@ class BarangController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Barang berhasil dihapus');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.barang.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()

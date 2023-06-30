@@ -28,17 +28,15 @@ class BarangRepository implements BarangRepositoryInterface
         return Barang::create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(Barang $barang, array $data)
     {
-        $barang = $this->getById($id);
         $barang->update($data);
 
         return $barang;
     }
 
-    public function delete(int $id)
+    public function delete(Barang $barang)
     {
-        $barang = $this->getById($id);
         $barang->delete();
 
         return $barang;

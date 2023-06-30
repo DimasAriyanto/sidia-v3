@@ -25,7 +25,7 @@ class SupplierService implements SupplierServiceInterface
     public function getById(int $id): Supplier
     {
         $supplier = $this->supplierReposittory->getById($id);
-        if (!$supplier) {
+        if (! $supplier) {
             throw new ModelNotFoundException('Supplier dengan id '.$id.' tidak ditemukan');
         }
 
@@ -34,7 +34,7 @@ class SupplierService implements SupplierServiceInterface
 
     public function getByName(string $name): Supplier
     {
-        $supplier = $this->supplierReposittory->getByName($name);;
+        $supplier = $this->supplierReposittory->getByName($name);
         if (! $supplier) {
             throw new ModelNotFoundException('Supplier dengan nama '.$name.' tidak ditemukan');
         }
@@ -49,11 +49,15 @@ class SupplierService implements SupplierServiceInterface
 
     public function update(int $id, array $data)
     {
-        return $this->supplierReposittory->update($id, $data);
+        $supplier = $this->getById($id);
+
+        return $this->supplierReposittory->update($supplier, $data);
     }
 
     public function delete(int $id)
     {
-        return $this->supplierReposittory->delete($id);
+        $supplier = $this->getById($id);
+
+        return $this->supplierReposittory->delete($supplier);
     }
 }

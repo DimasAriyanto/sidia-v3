@@ -78,4 +78,25 @@ class UserControllerTest extends TestCase
             'id' => $user->id,
         ]);
     }
+
+    public function test_it_redirect_to_index_if_not_found(): void
+    {
+        $indexRoute = 'dashboard.master.user.index';
+        $notFoundId = -9999;
+        $response = $this->get(route('dashboard.master.user.show', ['id' => $notFoundId]));
+        $response->assertRedirectToRoute($indexRoute);
+        $response->assertSessionHasErrors();
+
+        $response = $this->get(route('dashboard.master.user.edit', ['id' => $notFoundId]));
+        $response->assertRedirectToRoute($indexRoute);
+        $response->assertSessionHasErrors();
+
+        $response = $this->put(route('dashboard.master.user.update', ['id' => $notFoundId]));
+        $response->assertRedirectToRoute($indexRoute);
+        $response->assertSessionHasErrors();
+
+        $response = $this->delete(route('dashboard.master.user.destroy', ['id' => $notFoundId]));
+        $response->assertRedirectToRoute($indexRoute);
+        $response->assertSessionHasErrors();
+    }
 }
