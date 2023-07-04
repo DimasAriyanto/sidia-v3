@@ -1,10 +1,10 @@
 <x-dashboard.layout>
   <x-slot:title>
-    Detail User
+    Detail Supplier
     </x-slot>
     <x-dashboard.breadcrumb />
     <div class="card">
-      <div class="card-header bg-dark text-light fw-bold">Detail User</div>
+      <div class="card-header bg-dark text-light fw-bold">Detail Supplier</div>
       <div class="card-body">
         <form>
           <div class="mb-3">
