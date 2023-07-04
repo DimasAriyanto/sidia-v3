@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\DataTables\BarangDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Master\StoreBarangRequest;
 use App\Http\Requests\Master\UpdateBarangRequest;
@@ -18,11 +19,9 @@ class BarangController extends Controller
         $this->barangService = $barangService;
     }
 
-    public function index()
+    public function index(BarangDataTable $dataTable)
     {
-        $barang = $this->barangService->getAll();
-
-        return view('master.barang.index', compact('barang'));
+        return $dataTable->render('master.barang.index');
     }
 
     public function show(int $id)

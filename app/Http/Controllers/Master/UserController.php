@@ -79,6 +79,12 @@ class UserController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'User berhasil ditambahkan');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.user.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()

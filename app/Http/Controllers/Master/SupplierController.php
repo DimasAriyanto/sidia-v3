@@ -19,45 +19,11 @@ class SupplierController extends Controller
         $this->supplierServices = $supplierServices;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(SuppliersDataTable $dataTable)
     {
         return $dataTable->render('master.supplier.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('master.supplier.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSupplierRequest $request)
-    {
-        try {
-            $data = $request->validated();
-            $this->supplierServices->create($data);
-
-            return back()
-                ->with('success', 'Supplier berhasil ditambahkan');
-        } catch (Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors([
-                    'error' => 'Gagal menambah supplier.',
-                ]);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id)
     {
         try {
@@ -77,9 +43,11 @@ class SupplierController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function create()
+    {
+        return view('master.supplier.create');
+    }
+
     public function edit(int $id)
     {
         try {
@@ -99,9 +67,30 @@ class SupplierController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function store(StoreSupplierRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $this->supplierServices->create($data);
+
+            return redirect()
+                ->back()
+                ->with('success', 'Supplier berhasil ditambahkan');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.master.supplier.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
+        } catch (Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' => 'Gagal menambah supplier.',
+                ]);
+        }
+    }
+
     public function update(UpdateSupplierRequest $request, int $id)
     {
         try {
@@ -126,9 +115,6 @@ class SupplierController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         try {

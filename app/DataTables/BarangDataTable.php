@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Barang;
+use App\Models\Master\Barang;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;

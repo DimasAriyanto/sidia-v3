@@ -36,7 +36,7 @@ class UserService implements UserServiceInterface
     {
         $user = $this->userRepository->getByUsername($username);
         if (! $user) {
-            throw new ModelNotFoundException('Barang dengan nama '.$username.' tidak ditemukan');
+            throw new ModelNotFoundException('User dengan username '.$username.' tidak ditemukan');
         }
 
         return $user;
