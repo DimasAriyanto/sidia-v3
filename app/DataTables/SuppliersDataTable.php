@@ -20,8 +20,33 @@ class SuppliersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'suppliers.action')
-            ->setRowId('id');
+            ->addIndexColumn()
+            ->addColumn('action',  function (Supplier $supplier) {
+                $detailHref = route('dashboard.master.supplier.show', ['id' => $supplier->id]);
+                $editHref = route('dashboard.master.supplier.edit', ['id' => $supplier->id]);
+                $deleteAction = route('dashboard.master.supplier.destroy', ['id' => $supplier->id]);
+                $methodDelete = method_field('delete');
+                $csrf = csrf_field();
+
+                return <<<EOL
+              <a href="$detailHref" class="btn btn-sm btn-info text-white">
+                <i class="fa-solid fa-circle-info"></i>
+                Detail
+              </a>
+              <a href="$editHref" class="btn btn-sm btn-warning text-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit
+              </a>
+              <form action="$deleteAction" method="post" class="d-inline">
+                $csrf
+                $methodDelete
+                <button type="submit" class="btn btn-sm btn-danger text-white">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete
+                </button>
+              </form>
+            EOL;
+            });
     }
 
     /**
@@ -40,6 +65,7 @@ class SuppliersDataTable extends DataTable
         return $this->builder()
             ->setTableId('suppliers-table')
             ->columns($this->getColumns())
+            ->addAction()
             ->minifiedAjax()
                     //->dom('Bfrtip')
             ->orderBy(1)
@@ -60,15 +86,16 @@ class SuppliersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('DT_RowIndex')
+                ->title('#')
+                ->searchable(false)
+                ->orderable(false),
+            Column::make('nama')
+                ->title('Nama'),
+            Column::make('alamat')
+                ->title('Alamat'),
+            Column::make('nomer_telepon')
+                ->title('Nomer Telepon')
         ];
     }
 

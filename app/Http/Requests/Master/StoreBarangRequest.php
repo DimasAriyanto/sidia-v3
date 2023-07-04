@@ -25,6 +25,7 @@ class StoreBarangRequest extends FormRequest
         return [
             'nama' => 'required|string',
             'satuan' => 'required|string',
+            'stok' => 'required|integer',
         ];
     }
 }

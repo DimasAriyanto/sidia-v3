@@ -20,8 +20,33 @@ class BarangDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'barang.action')
-            ->setRowId('id');
+            ->addIndexColumn()
+            ->addColumn('action', function (Barang $barang) {
+                $detailHref = route('dashboard.master.barang.show', ['id' => $barang->id]);
+                $editHref = route('dashboard.master.barang.edit', ['id' => $barang->id]);
+                $deleteAction = route('dashboard.master.barang.destroy', ['id' => $barang->id]);
+                $methodDelete = method_field('delete');
+                $csrf = csrf_field();
+
+                return <<<EOL
+              <a href="$detailHref" class="btn btn-sm btn-info text-white">
+                <i class="fa-solid fa-circle-info"></i>
+                Detail
+              </a>
+              <a href="$editHref" class="btn btn-sm btn-warning text-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit
+              </a>
+              <form action="$deleteAction" method="post" class="d-inline">
+                $csrf
+                $methodDelete
+                <button type="submit" class="btn btn-sm btn-danger text-white">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete
+                </button>
+              </form>
+            EOL;
+            });
     }
 
     /**
@@ -40,6 +65,7 @@ class BarangDataTable extends DataTable
         return $this->builder()
             ->setTableId('barang-table')
             ->columns($this->getColumns())
+            ->addAction()
             ->minifiedAjax()
                     //->dom('Bfrtip')
             ->orderBy(1)
@@ -60,15 +86,16 @@ class BarangDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('DT_RowIndex')
+                ->title('#')
+                ->searchable(false)
+                ->orderable(false),
+            Column::make('nama')
+                ->title('Nama'),
+            Column::make('satuan')
+                ->title('Satuan'),
+            Column::make('stok')
+                ->title('stok')
         ];
     }
 
