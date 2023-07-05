@@ -10,7 +10,7 @@ class TransaksiRepository implements TransaksiRepositoryInterface
 {
     public function getAllByJenisTransaksi($jenisTransaksi): Collection
     {
-        return Transaksi::where('jenis', $jenisTransaksi)->get();
+        return Transaksi::where('jenis_transaksi', $jenisTransaksi)->get();
     }
 
     public function getById(int $id): ?Transaksi
