@@ -16,7 +16,7 @@ class Transaksi extends Model
 
     protected $table = 'transaksi';
 
-    public static $JENIS_TRANSAKSI = ['pembalian', 'penjualan'];
+    public static $JENIS_TRANSAKSI = ['pembelian', 'penjualan'];
 
     protected $fillable = [
         'tanggal_transaksi',

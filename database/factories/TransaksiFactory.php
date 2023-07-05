@@ -27,8 +27,8 @@ class TransaksiFactory extends Factory
         $jumlah = fake()->numberBetween(1, 10);
 
         return [
-            'tanggal' => fake()->dateTimeBetween('-1 month', '+3 months'),
-            'jenis' => $jenisTransaksi,
+            'tanggal_transaksi' => fake()->dateTimeBetween('-1 month', '+3 months'),
+            'jenis_transaksi' => $jenisTransaksi,
             'harga' => $harga,
             'jumlah' => $jumlah,
             'barang_id' => function () {
@@ -47,7 +47,7 @@ class TransaksiFactory extends Factory
     public function pembelian(): static
     {
         return $this->state(fn (array $attributes) => [
-            'jenis' => 'pembelian',
+            'jenis_transaksi' => 'pembelian',
             'supplier_id' => Supplier::inRandomOrder()->first()->id,
         ]);
     }
@@ -55,7 +55,7 @@ class TransaksiFactory extends Factory
     public function penjualan(): static
     {
         return $this->state(fn (array $attributes) => [
-            'jenis' => 'penjualan',
+            'jenis_transaksi' => 'penjualan',
         ]);
     }
 }

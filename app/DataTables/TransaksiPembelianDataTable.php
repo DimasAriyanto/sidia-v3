@@ -57,7 +57,7 @@ class TransaksiPembelianDataTable extends DataTable
     {
         return $model
             ->with(['user', 'barang', 'supplier'])
-            ->where('jenis', $pembelianService->getJenisTransaksi());
+            ->where('jenis_transaksi', $pembelianService->getJenisTransaksi());
     }
 
     /**
@@ -99,7 +99,7 @@ class TransaksiPembelianDataTable extends DataTable
                 ->title('Harga'),
             Column::make('supplier.nama')
                 ->title('Supplier'),
-            Column::make('tanggal')
+            Column::make('tanggal_transaksi')
                 ->title('Tanggal Transaksi'),
             Column::make('user.nama')
                 ->title('Penginput'),
