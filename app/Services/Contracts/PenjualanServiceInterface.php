@@ -18,4 +18,6 @@ interface PenjualanServiceInterface
     public function delete(int $id): bool;
 
     public function getJenisTransaksi(): string;
+
+    public function getMonthlyTransaction(): Collection;
 }

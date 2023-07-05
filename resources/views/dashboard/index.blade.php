@@ -1,19 +1,19 @@
 <x-dashboard.layout>
   <div class="row row-cols-1 row-cols-md-5 gd-4">
     @foreach ($countData as $item)
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body row col-12 align-items-center">
-          <div class="col-10">
-            <h5>{{ $item['count'] }}</h5>
-            <p class="card-text">{{ $item['name'] }}</p>
-          </div>
-          <div class="col-2 text-center">
-            {!! $item['icon'] !!}
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body row col-12 align-items-center">
+            <div class="col-10">
+              <h5>{{ $item['count'] }}</h5>
+              <p class="card-text">{{ $item['name'] }}</p>
+            </div>
+            <div class="col-2 text-center">
+              {!! $item['icon'] !!}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     @endforeach
   </div>
 
@@ -21,10 +21,25 @@
     <div class="card-body">
       <div class="col-12 row">
         <div class="col-8">
-          <canvas id="line-chart" width="100%"></canvas>
+          <p class="fs-4">Grafik Transaksi Harga Pembelian & Penjualan per Bulan</p>
+          <canvas id="line-chart-harga" width="100%"></canvas>
         </div>
         <div class="col-4">
-          <canvas id="pie-chart" width="100%"></canvas>
+          <canvas id="pie-chart-harga" width="100%"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <div class="col-12 row">
+        <div class="col-8">
+          <p class="fs-4">Grafik Transaksi Jumlah Pembelian & Penjualan per Bulan</p>
+          <canvas id="line-chart-jumlah" width="100%"></canvas>
+        </div>
+        <div class="col-4">
+          <canvas id="pie-chart-jumlah" width="100%"></canvas>
         </div>
       </div>
     </div>
@@ -34,33 +49,45 @@
   @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script>
-      const labels = [
-        'January',
-        'Febuary',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July'
-      ]
-      const lineChartData = {
-        labels: labels,
-        datasets: [{
-          label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]
-      };
-      const lineChartConfig = {
-        type: 'line',
-        data: lineChartData,
-      };
-      const lineChartCtx = document
-        .getElementById('line-chart')
+      const labels = {{ Js::from($labels) }}
+      const lineChartData = {{ Js::from($lineChartData) }}
+      const lineChartHargaCtx = document
+        .getElementById('line-chart-harga')
         .getContext('2d')
-      const lineChart = new Chart(lineChartCtx, lineChartConfig)
+      new Chart(lineChartHargaCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+              label: 'Total Harga Pembelian',
+              data: lineChartData.pembelian.harga
+            },
+            {
+              label: 'Total Harga Penjualan',
+              data: lineChartData.penjualan.harga
+            },
+          ]
+        },
+      })
+
+      const lineChartJumlahCtx = document
+        .getElementById('line-chart-jumlah')
+        .getContext('2d')
+      new Chart(lineChartJumlahCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+              label: 'Total Jumlah Pembelian',
+              data: lineChartData.pembelian.jumlah
+            },
+            {
+              label: 'Total Jumlah Penjualan',
+              data: lineChartData.penjualan.jumlah
+            },
+          ]
+        },
+      })
 
       const pieChartData = {
         labels: labels,

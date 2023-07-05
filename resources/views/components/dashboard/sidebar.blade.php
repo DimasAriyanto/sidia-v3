@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+<div class="col-2 p-3 text-bg-dark d-flex flex-column" style="width: 280px;">
   <a href="{{ route('dashboard.index') }}" class="py-1 px-3">
     <img width="100px" src="{{ asset('logo/sidia.png') }}" alt="{{ env('APP_NAME') }}">
   </a>

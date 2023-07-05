@@ -25,15 +25,14 @@
       height: 100vh;
       max-height: 100vh;
       overflow-x: auto;
-      overflow-y: hidden;
     }
   </style>
 </head>
 
 <body>
-  <main class="d-flex flex-nowrap overflow-x-hidden">
+  <main class="col-12 d-flex flex-wrap">
     <x-dashboard.sidebar />
-    <div class="d-flex flex-column flex-grow-1">
+    <div class="col-10 flex-grow-1">
       <x-dashboard.navbar />
       <div class="p-5">
         {{ $slot }}

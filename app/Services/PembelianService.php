@@ -61,4 +61,28 @@ class PembelianService implements PembelianServiceInterface
     {
         return $this->jenisTransaksi;
     }
+
+    public function getMonthlyTransaction(): Collection
+    {
+        $pembelianMonthlyTransaction = $this->transaksiRepository->getMonthlyTransaction($this->getJenisTransaksi());
+
+        $availableMonths = $pembelianMonthlyTransaction->pluck('bulan')->toArray();
+        $remainingMonths = array_diff(range(1, 12), $availableMonths);
+
+        foreach ($remainingMonths as $month) {
+            $pembelianMonthlyTransaction->push([
+                'jenis_transaksi' => $this->getJenisTransaksi(),
+                'bulan' => $month,
+                'harga' => 0,
+                'jumlah' => 0,
+            ]);
+        }
+
+        $pembelianMonthlyTransaction = $pembelianMonthlyTransaction
+            ->sort(function ($a, $b) {
+                return $a['bulan'] > $b['bulan'];
+            });
+
+        return $pembelianMonthlyTransaction;
+    }
 }

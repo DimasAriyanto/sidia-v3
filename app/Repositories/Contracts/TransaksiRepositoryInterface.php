@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface TransaksiRepositoryInterface
 {
-    public function getAllByJenisTransaksi($jenisTransaksi): Collection;
+    public function getAllByJenisTransaksi(string $jenisTransaksi): Collection;
 
     public function getById(int $id): ?Transaksi;
 
@@ -16,4 +16,6 @@ interface TransaksiRepositoryInterface
     public function update(Transaksi $transaksi, array $data): bool;
 
     public function delete(Transaksi $transaksi): bool;
+
+    public function getMonthlyTransaction(string $jenisTransaksi = ''): Collection;
 }

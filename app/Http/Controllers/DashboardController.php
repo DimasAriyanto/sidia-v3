@@ -44,10 +44,36 @@ class DashboardController extends Controller
                 'icon' => '<i class="fa-solid fa-store fs-1"></i>',
             ],
         ];
-        $lineChartData = [
 
+        $labels = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
         ];
 
-        return view('dashboard.index', compact('countData'));
+        $pembelianMonthlyTransaction = $pembelianService->getMonthlyTransaction();
+        $penjualanMonthlyTransaction = $penjualanService->getMonthlyTransaction();
+
+        $lineChartData = [
+            'pembelian' => [
+                'harga' => $pembelianMonthlyTransaction->pluck('harga')->toArray(),
+                'jumlah' => $pembelianMonthlyTransaction->pluck('jumlah')->toArray(),
+            ],
+            'penjualan' => [
+                'harga' => $penjualanMonthlyTransaction->pluck('harga')->toArray(),
+                'jumlah' => $penjualanMonthlyTransaction->pluck('jumlah')->toArray(),
+            ],
+        ];
+
+        return view('dashboard.index', compact('countData', 'labels', 'lineChartData'));
     }
 }
