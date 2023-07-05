@@ -23,7 +23,7 @@ class PenjualanController extends Controller
     {
         $penjualan = $this->penjualanService->getAll();
 
-        return view('', compact('penjualan'));
+        return view('transaksi.penjualan.index', compact('penjualan'));
     }
 
     public function show(int $id)
@@ -31,11 +31,13 @@ class PenjualanController extends Controller
         try {
             $penjualan = $this->penjualanService->getById($id);
 
-            return view('', compact('penjualan'));
+            return view('transaksi.penjualan.show', compact('penjualan'));
         } catch (ModelNotFoundException $e) {
-            return back()->withErrors([
-                'error' => 'Transaksi penjualan tidak ditemukan.',
-            ]);
+            return redirect()
+                ->route('dashboard.transaksi.penjualan.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return back()->withErrors([
                 'error' => 'Ada masalah saat membuka halaman!',
@@ -45,14 +47,26 @@ class PenjualanController extends Controller
 
     public function create()
     {
-        return view('');
+        return view('transaksi.penjualan.create');
     }
 
     public function edit(int $id)
     {
-        $penjualan = $this->penjualanService->getById($id);
+        try {
+            $penjualan = $this->penjualanService->getById($id);
 
-        return view('', compact('penjualan'));
+            return view('transaksi.penjualan.edit', compact('penjualan'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.transaksi.penjualan.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'error' => 'Ada masalah saat membuka halaman!',
+            ]);
+        }
     }
 
     public function store(StorePenjualanRequest $request)
@@ -64,6 +78,12 @@ class PenjualanController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Transaksi penjualan berhasil ditambahkan');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.transaksi.penjualan.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
@@ -82,6 +102,12 @@ class PenjualanController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Transaksi penjualan berhasil diubah');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.transaksi.penjualan.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
@@ -99,6 +125,12 @@ class PenjualanController extends Controller
             return redirect()
                 ->back()
                 ->with('success', 'Transaksi penjualan berhasil dihapus');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+                ->route('dashboard.transaksi.penjualan.index')
+                ->withErrors([
+                    'error' => $e->getMessage(),
+                ]);
         } catch (Exception $e) {
             return redirect()
                 ->back()
