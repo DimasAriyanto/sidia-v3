@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\DataTables\TransaksiPembelianDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\StorePembelianRequest;
 use App\Http\Requests\Transaksi\UpdatePembelianRequest;
 use App\Services\Contracts\PembelianServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class PembelianController extends Controller
 {
@@ -19,11 +19,9 @@ class PembelianController extends Controller
         $this->pembelianService = $pembelianService;
     }
 
-    public function index()
+    public function index(TransaksiPembelianDataTable $dataTable)
     {
-        $pembelian = $this->pembelianService->getAll();
-
-        return view('', compact('pembelian'));
+        return $dataTable->render('transaksi.pembelian.index');
     }
 
     public function show(int $id)

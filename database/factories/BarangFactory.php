@@ -22,7 +22,7 @@ class BarangFactory extends Factory
         return [
             'nama' => fake()->name(),
             'satuan' => fake()->randomElement(['kilo', 'gram', 'liter', 'unit', 'lembar', 'batang', 'ekor']),
-            'stok' => fake()->numberBetween(0, 100),
+            'stok' => 0,
         ];
     }
 }

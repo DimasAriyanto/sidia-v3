@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->foreignId('barang_id')->constrained('barang');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('supplier_id')->constrained('suppliers');
+            $table->foreignId('supplier_id')->nullable();
             $table->timestamps();
         });
     }

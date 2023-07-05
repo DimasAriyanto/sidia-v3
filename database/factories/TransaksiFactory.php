@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Master\Barang;
 use App\Models\Master\Supplier;
+use App\Models\Transaksi\Transaksi;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TransaksiFactory extends Factory
 {
+    protected $model = Transaksi::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,26 +22,40 @@ class TransaksiFactory extends Factory
      */
     public function definition(): array
     {
-        $jenisTransaksi = fake()->randomElement(['Pembelian', 'Penjualan']);
-        $harga = fake()->randomFloat(2, 10, 1000);
+        $jenisTransaksi = fake()->randomElement(['pembelian', 'penjualan']);
+        $harga = fake()->randomFloat(2, 10000, 100000);
         $jumlah = fake()->numberBetween(1, 10);
-        $total = $harga * $jumlah;
 
         return [
-            'tanggal' => fake()->dateTime(),
-            'janis' => $jenisTransaksi,
+            'tanggal' => fake()->dateTimeBetween('-1 month', '+3 months'),
+            'jenis' => $jenisTransaksi,
             'harga' => $harga,
             'jumlah' => $jumlah,
             'barang_id' => function () {
                 return Barang::inRandomOrder()->first()->id;
             },
             'user_id' => function () {
-            return User::inRandomOrder()->first()->id;
+                return User::inRandomOrder()->first()->id;
             },
             'supplier_id' => function () use ($jenisTransaksi) {
-                return ($jenisTransaksi == 'Pembelian') ? Supplier::inRandomOrder()->first()->id : null;
+                return ($jenisTransaksi == 'pembelian') ? Supplier::inRandomOrder()->first()->id : null;
             },
 
         ];
+    }
+
+    public function pembelian(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'jenis' => 'pembelian',
+            'supplier_id' => Supplier::inRandomOrder()->first()->id,
+        ]);
+    }
+
+    public function penjualan(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'jenis' => 'penjualan',
+        ]);
     }
 }
