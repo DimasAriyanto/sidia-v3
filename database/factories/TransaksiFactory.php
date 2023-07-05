@@ -22,8 +22,8 @@ class TransaksiFactory extends Factory
      */
     public function definition(): array
     {
-        $jenisTransaksi = fake()->randomElement(['pembelian', 'penjualan']);
-        $harga = fake()->randomFloat(2, 10000, 100000);
+        $jenisTransaksi = fake()->randomElement(Transaksi::$JENIS_TRANSAKSI);
+        $harga = fake()->randomFloat(0, 1000, 100000);
         $jumlah = fake()->numberBetween(1, 10);
 
         return [
