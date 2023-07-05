@@ -67,10 +67,10 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
     });
 
     Route::prefix('/transaksi')->name('transaksi.')->group(function () {
-        Route::prefix('/pemasukan')->name('pemasukan.')->group(function () {
+        Route::prefix('/pembelian')->name('pembelian.')->group(function () {
             // View response routes
             Route::get('/', [PembelianController::class, 'index'])->name('index');
-        Route::get('/create', [PembelianController::class, 'create'])->name('create');
+            Route::get('/create', [PembelianController::class, 'create'])->name('create');
             Route::get('/{id}/show', [PembelianController::class, 'show'])->name('show');
             Route::get('/{id}/edit', [PembelianController::class, 'edit'])->name('edit');
 

@@ -14,6 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, ModelAccessor;
 
+    protected $table = 'users';
+
     public static $USER_TYPE = ['admin', 'operator'];
 
     /**

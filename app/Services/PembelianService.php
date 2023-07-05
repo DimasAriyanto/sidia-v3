@@ -56,4 +56,9 @@ class PembelianService implements PembelianServiceInterface
 
         return $this->transaksiRepository->delete($transaksi);
     }
+
+    public function getJenisTransaksi(): string
+    {
+        return $this->jenisTransaksi;
+    }
 }
