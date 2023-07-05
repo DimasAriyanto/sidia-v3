@@ -29,7 +29,7 @@ return new class extends Migration
             CREATE TRIGGER pembelian AFTER INSERT ON transaksi
             FOR EACH ROW
             BEGIN
-                IF NEW.jenis_transaksi = "Pembelian" THEN
+                IF NEW.jenis_transaksi = "pembelian" THEN
                     UPDATE barang SET stok = stok + NEW.jumlah WHERE id = NEW.barang_id;
                 END IF;
             END
@@ -39,7 +39,7 @@ return new class extends Migration
             CREATE TRIGGER penjualan AFTER INSERT ON transaksi
             FOR EACH ROW
             BEGIN
-                IF NEW.jenis_transaksi = "Penjualan" THEN
+                IF NEW.jenis_transaksi = "penjualan" THEN
                     UPDATE barangs SET stok = stok - NEW.jumlah WHERE id = NEW.barang_id;
                 END IF;
             END
