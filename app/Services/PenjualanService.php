@@ -57,4 +57,9 @@ class PenjualanService implements PenjualanServiceInterface
 
         return $this->transaksiRepository->delete($transaksi);
     }
+
+    public function getJenisTransaksi(): string
+    {
+        return $this->jenisTransaksi;
+    }
 }

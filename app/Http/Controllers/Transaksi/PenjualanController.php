@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\DataTables\TransaksiPenjualanDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\StorePenjualanRequest;
 use App\Http\Requests\Transaksi\UpdatePenjualanRequest;
@@ -19,11 +20,9 @@ class PenjualanController extends Controller
         $this->penjualanService = $penjualanService;
     }
 
-    public function index()
+    public function index(TransaksiPenjualanDataTable $dataTable)
     {
-        $penjualan = $this->penjualanService->getAll();
-
-        return view('transaksi.penjualan.index', compact('penjualan'));
+        return $dataTable->render('transaksi.penjualan.index');
     }
 
     public function show(int $id)
