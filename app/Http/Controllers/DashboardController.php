@@ -44,6 +44,9 @@ class DashboardController extends Controller
                 'icon' => '<i class="fa-solid fa-store fs-1"></i>',
             ],
         ];
+        $lineChartData = [
+
+        ];
 
         return view('dashboard.index', compact('countData'));
     }

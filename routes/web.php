@@ -79,7 +79,7 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
             Route::put('/{id}', [PembelianController::class, 'update'])->name('update');
             Route::delete('/{id}', [PembelianController::class, 'destroy'])->name('destroy');
         });
-        Route::prefix('/pengeluaran')->name('pengeluaran.')->group(function () {
+        Route::prefix('/penjualan')->name('penjualan.')->group(function () {
             // View response routes
             Route::get('/', [PenjualanController::class, 'index'])->name('index');
             Route::get('/create', [PenjualanController::class, 'create'])->name('create');
