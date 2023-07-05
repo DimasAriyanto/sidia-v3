@@ -32,15 +32,6 @@
             </div>
           @enderror
         </div>
-        <div class="mb-3">
-          <label for="stok" class="form-label">Stok</label>
-          <input type="number" class="form-control @error('stok') is-invalid @enderror" name="stok" id="stok" value="{{ old('stok') }}">
-          @error('stok')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
-        </div>
         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
       </form>
       <hr>

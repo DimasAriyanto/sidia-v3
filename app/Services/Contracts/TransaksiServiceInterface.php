@@ -5,9 +5,9 @@ namespace App\Services\Contracts;
 use App\Models\Transaksi\Transaksi;
 use Illuminate\Database\Eloquent\Collection;
 
-interface PembelianServiceInterface
+interface TransaksiServiceInterface
 {
-    public function getAll(): Collection;
+    public function getAllByJenisTransaksi($jenisTransaksi): Collection;
 
     public function getById(int $id): Transaksi;
 

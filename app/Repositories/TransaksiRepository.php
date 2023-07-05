@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TransaksiRepository implements TransaksiRepositoryInterface
 {
-    public function getAllByJenisTransaksi($jenisTransaksi)
+    public function getAllByJenisTransaksi($jenisTransaksi): Collection
     {
-        return Transaksi::where('jenis_transaksi', $jenisTransaksi)->get();
+        return Transaksi::where('jenis', $jenisTransaksi)->get();
     }
 
-    public function getById(int $id): Transaksi|null
+    public function getById(int $id): ?Transaksi
     {
         return Transaksi::find($id);
     }
@@ -23,17 +23,13 @@ class TransaksiRepository implements TransaksiRepositoryInterface
         return Transaksi::create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(Transaksi $transaksi, array $data): bool
     {
-        $transaksi = $this->getById($id);
-        $transaksi->update($data);
-        return $transaksi;
+        return $transaksi->update($data);
     }
 
-    public function delete(int $id)
+    public function delete(Transaksi $transaksi): bool
     {
-        $transaksi = $this->getById($id);
-        $transaksi->delete();
-        return $transaksi;
+        return $transaksi->delete();
     }
 }

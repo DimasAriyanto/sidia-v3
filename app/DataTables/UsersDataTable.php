@@ -65,7 +65,6 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->setTableId('users-table')
             ->columns($this->getColumns())
-            ->addAction()
             ->minifiedAjax()
             ->selectStyleSingle()
             ->buttons([
@@ -95,6 +94,13 @@ class UsersDataTable extends DataTable
             Column::make('user_type')
                 ->title('Type')
                 ->render('ucfirst(data)'),
+            Column::make('action')
+                ->title('Action')
+                ->width('20%')
+                ->orderable(false)
+                ->searchable(false)
+                ->exportable(false)
+                ->printable(false),
         ];
     }
 

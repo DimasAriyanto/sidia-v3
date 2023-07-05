@@ -25,7 +25,6 @@ class UpdateBarangRequest extends FormRequest
         return [
             'nama' => 'sometimes|required|string',
             'satuan' => 'sometimes|required|string',
-            'stok' => 'sometimes|required|integer',
         ];
     }
 }

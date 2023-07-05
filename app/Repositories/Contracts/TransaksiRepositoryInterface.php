@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface TransaksiRepositoryInterface
 {
-    public function getAllByJenisTransaksi($jenisTransaksi);
+    public function getAllByJenisTransaksi($jenisTransaksi): Collection;
 
-    public function getById(int $id): Transaksi|null;
+    public function getById(int $id): ?Transaksi;
 
     public function create(array $data): Transaksi;
 
-    public function update(int $id, array $data);
+    public function update(Transaksi $transaksi, array $data): bool;
 
-    public function delete(int $id);
+    public function delete(Transaksi $transaksi): bool;
 }

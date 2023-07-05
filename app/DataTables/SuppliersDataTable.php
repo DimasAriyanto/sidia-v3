@@ -21,7 +21,7 @@ class SuppliersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action',  function (Supplier $supplier) {
+            ->addColumn('action', function (Supplier $supplier) {
                 $detailHref = route('dashboard.master.supplier.show', ['id' => $supplier->id]);
                 $editHref = route('dashboard.master.supplier.edit', ['id' => $supplier->id]);
                 $deleteAction = route('dashboard.master.supplier.destroy', ['id' => $supplier->id]);
@@ -65,9 +65,7 @@ class SuppliersDataTable extends DataTable
         return $this->builder()
             ->setTableId('suppliers-table')
             ->columns($this->getColumns())
-            ->addAction()
             ->minifiedAjax()
-                    //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -95,7 +93,14 @@ class SuppliersDataTable extends DataTable
             Column::make('alamat')
                 ->title('Alamat'),
             Column::make('nomer_telepon')
-                ->title('Nomer Telepon')
+                ->title('Nomer Telepon'),
+            Column::make('action')
+                ->title('Action')
+                ->width('20%')
+                ->orderable(false)
+                ->searchable(false)
+                ->exportable(false)
+                ->printable(false),
         ];
     }
 

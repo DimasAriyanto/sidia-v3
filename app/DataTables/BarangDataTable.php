@@ -65,9 +65,7 @@ class BarangDataTable extends DataTable
         return $this->builder()
             ->setTableId('barang-table')
             ->columns($this->getColumns())
-            ->addAction()
             ->minifiedAjax()
-                    //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -94,8 +92,13 @@ class BarangDataTable extends DataTable
                 ->title('Nama'),
             Column::make('satuan')
                 ->title('Satuan'),
-            Column::make('stok')
-                ->title('stok')
+            Column::make('action')
+                ->title('Action')
+                ->width('20%')
+                ->orderable(false)
+                ->searchable(false)
+                ->exportable(false)
+                ->printable(false),
         ];
     }
 

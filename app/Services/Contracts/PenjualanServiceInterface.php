@@ -13,7 +13,7 @@ interface PenjualanServiceInterface
 
     public function create(array $data): Transaksi;
 
-    public function update(int $id, array $data);
+    public function update(int $id, array $data): bool;
 
-    public function delete(int $id);
+    public function delete(int $id): bool;
 }

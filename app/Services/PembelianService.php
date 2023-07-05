@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PembelianService implements PembelianServiceInterface
 {
-    protected $transaksiRepository;
+    protected TransaksiRepositoryInterface $transaksiRepository;
+
+    protected string $jenisTransaksi = 'pembelian';
 
     public function __construct(TransaksiRepositoryInterface $transaksiRepository)
     {
@@ -20,13 +22,13 @@ class PembelianService implements PembelianServiceInterface
 
     public function getAll(): Collection
     {
-        return $this->transaksiRepository->getAllByJenisTransaksi('pembelian');
+        return $this->transaksiRepository->getAllByJenisTransaksi($this->jenisTransaksi);
     }
 
     public function getById(int $id): Transaksi
     {
         $pembelian = $this->transaksiRepository->getById($id);
-        if (!$pembelian) {
+        if (! $pembelian) {
             throw new ModelNotFoundException('Transaksi pembelian dengan id '.$id.' tidak ditemukan');
         }
 
@@ -35,18 +37,23 @@ class PembelianService implements PembelianServiceInterface
 
     public function create(array $data): Transaksi
     {
-        $data['jenis_transaksi'] = 'pembelian';
+        $data['jenis_transaksi'] = $this->jenisTransaksi;
         $data['user_id'] = Auth::id();
+
         return $this->transaksiRepository->create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): bool
     {
-        return $this->transaksiRepository->update($id, $data);
+        $transaksi = $this->getById($id);
+
+        return $this->transaksiRepository->update($transaksi, $data);
     }
 
-    public function delete(int $id)
+    public function delete(int $id): bool
     {
-        $this->transaksiRepository->delete($id);
+        $transaksi = $this->getById($id);
+
+        return $this->transaksiRepository->delete($transaksi);
     }
 }
