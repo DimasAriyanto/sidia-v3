@@ -40,7 +40,7 @@ return new class extends Migration
             FOR EACH ROW
             BEGIN
                 IF NEW.jenis_transaksi = "penjualan" THEN
-                    UPDATE barangs SET stok = stok - NEW.jumlah WHERE id = NEW.barang_id;
+                    UPDATE barang SET stok = stok - NEW.jumlah WHERE id = NEW.barang_id;
                 END IF;
             END
         ');
