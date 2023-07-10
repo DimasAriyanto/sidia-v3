@@ -6,17 +6,23 @@ use App\DataTables\TransaksiPembelianDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\StorePembelianRequest;
 use App\Http\Requests\Transaksi\UpdatePembelianRequest;
+use App\Services\Contracts\BarangServiceInterface;
 use App\Services\Contracts\PembelianServiceInterface;
+use App\Services\Contracts\SupplierServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PembelianController extends Controller
 {
     protected $pembelianService;
+    protected $barangService;
+    protected $supplierService;
 
-    public function __construct(PembelianServiceInterface $pembelianService)
+    public function __construct(PembelianServiceInterface $pembelianService, BarangServiceInterface $barangService, SupplierServiceInterface $supplierService)
     {
         $this->pembelianService = $pembelianService;
+        $this->barangService = $barangService;
+        $this->supplierService = $supplierService;
     }
 
     public function index(TransaksiPembelianDataTable $dataTable)
@@ -29,7 +35,7 @@ class PembelianController extends Controller
         try {
             $pembelian = $this->pembelianService->getById($id);
 
-            return view('', compact('pembelian'));
+            return view('transaksi.pembelian.show', compact('pembelian'));
         } catch (ModelNotFoundException $e) {
             return back()->withErrors([
                 'error' => 'Transaksi pembelian tidak ditemukan.',
@@ -43,14 +49,9 @@ class PembelianController extends Controller
 
     public function create()
     {
-        return view('');
-    }
-
-    public function edit(int $id)
-    {
-        $pembelian = $this->pembelianService->getById($id);
-
-        return view('', compact('pembelian'));
+        $barangData = $this->barangService->getAll();
+        $supplierData = $this->supplierService->getAll();
+        return view('transaksi.pembelian.create', compact('barangData', 'supplierData'));
     }
 
     public function store(StorePembelianRequest $request)
@@ -67,24 +68,6 @@ class PembelianController extends Controller
                 ->back()
                 ->withErrors([
                     'error' => 'Gagal menambahkan transaksi pembelian',
-                ]);
-        }
-    }
-
-    public function update(UpdatePembelianRequest $request, int $id)
-    {
-        try {
-            $data = $request->validated();
-            $this->pembelianService->update($id, $data);
-
-            return redirect()
-                ->back()
-                ->with('success', 'Transaksi pembelian berhasil diubah');
-        } catch (Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors([
-                    'error' => 'Gagal mengubah transaksi pembelian.',
                 ]);
         }
     }
