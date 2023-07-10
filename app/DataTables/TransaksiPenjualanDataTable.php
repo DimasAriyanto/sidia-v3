@@ -24,7 +24,6 @@ class TransaksiPenjualanDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function (Transaksi $transaksi) {
                 $detailHref = route('dashboard.transaksi.penjualan.show', ['id' => $transaksi->id]);
-                $editHref = route('dashboard.transaksi.penjualan.edit', ['id' => $transaksi->id]);
                 $deleteAction = route('dashboard.transaksi.penjualan.destroy', ['id' => $transaksi->id]);
                 $methodDelete = method_field('delete');
                 $csrf = csrf_field();
@@ -33,10 +32,6 @@ class TransaksiPenjualanDataTable extends DataTable
               <a href="$detailHref" class="btn btn-sm btn-info text-white">
                 <i class="fa-solid fa-circle-info"></i>
                 Detail
-              </a>
-              <a href="$editHref" class="btn btn-sm btn-warning text-white">
-                <i class="fa-solid fa-pen-to-square"></i>
-                Edit
               </a>
               <form action="$deleteAction" method="post" class="d-inline">
                 $csrf
@@ -56,6 +51,7 @@ class TransaksiPenjualanDataTable extends DataTable
     public function query(Transaksi $model, PenjualanServiceInterface $penjualanService): QueryBuilder
     {
         return $model
+            ->select('transaksi.*')
             ->with(['user', 'barang'])
             ->where('jenis_transaksi', $penjualanService->getJenisTransaksi());
     }

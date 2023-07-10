@@ -40,6 +40,7 @@ class PenjualanService implements PenjualanServiceInterface
         $data['jenis_transaksi'] = $this->jenisTransaksi;
         $data['supplier_id'] = null;
         $data['user_id'] = Auth::id();
+        $data['tanggal_transaksi'] = now();
 
         return $this->transaksiRepository->create($data);
     }

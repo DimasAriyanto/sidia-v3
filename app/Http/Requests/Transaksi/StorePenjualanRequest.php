@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Transaksi;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePenjualanRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StorePenjualanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,13 +23,9 @@ class StorePenjualanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tanggal_transaksi' => 'required|date',
-            'jenis_transaksi' => 'required|string',
             'harga' => 'required|numeric',
             'jumlah' => 'required|integer',
             'barang_id' => 'required|exists:barang,id',
-            'user_id' => 'required|exists:users,id',
-            'supplier_id' => 'nullable|exists:supplier,id',
         ];
     }
 }

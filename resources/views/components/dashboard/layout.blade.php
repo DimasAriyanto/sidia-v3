@@ -2,63 +2,49 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{ env('APP_NAME') }} | {{ @$title }} </title>
-  <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ env('APP_NAME') }} | {{ @$title }} </title>
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
-  <script src="{{ asset('js/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap.dataTables.min.js') }}"></script>
-  <script src="{{ asset('js/app.js') }}"></script>
 
-  <style>
-    body {
-      min-height: 100vh;
-    }
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    main {
-      height: 100vh;
-      max-height: 100vh;
-      overflow-x: auto;
-    }
+    <style>
+        body {
+            min-height: 100vh;
+        }
 
-    @media only screen and (min-width: 1900px) {
-      .sidebar {
-        width: 280px;
-      }
-    }
-
-    @media only screen and (max-width: 1440px) {
-      .row-cols-5 > *{
-        flex: 0 0 auto;
-        width: 33%;
-      }
-    }
-
-    @media only screen and (min-width: 1440px) and (max-width: 1900px) {
-      .row-cols-5 > *{
-        flex: 0 0 auto;
-        width: 25%;
-      }
-    }
-  </style>
+        main {
+            height: 100vh;
+            max-height: 100vh;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 
 <body>
-  <main class="col-12 d-flex flex-wrap">
-    <x-dashboard.sidebar />
-    <div class="col-10 flex-grow-1">
-      <x-dashboard.navbar />
-      <div class="p-5">
-        {{ $slot }}
-      </div>
-    </div>
-  </main>
+    <main class="col-12 d-flex flex-wrap">
+        <x-dashboard.sidebar />
+        <div class="col-10 flex-grow-1">
+            <x-dashboard.navbar />
+            <div class="p-5">
+                {{ $slot }}
+            </div>
+        </div>
+    </main>
 </body>
 
 @stack('scripts')

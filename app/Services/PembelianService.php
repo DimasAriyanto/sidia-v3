@@ -39,6 +39,7 @@ class PembelianService implements PembelianServiceInterface
     {
         $data['jenis_transaksi'] = $this->jenisTransaksi;
         $data['user_id'] = Auth::id();
+        $data['tanggal_transaksi'] = now();
 
         return $this->transaksiRepository->create($data);
     }
