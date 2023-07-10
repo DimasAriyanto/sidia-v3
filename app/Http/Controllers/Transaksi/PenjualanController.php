@@ -19,12 +19,11 @@ class PenjualanController extends Controller
 
     public function __construct(
         PenjualanServiceInterface $penjualanService,
-        BarangServiceInterface $barangService
+        BarangServiceInterface $barangService,
     )
     {
         $this->penjualanService = $penjualanService;
         $this->barangService = $barangService;
-
     }
 
     public function index(TransaksiPenjualanDataTable $dataTable)
@@ -53,7 +52,8 @@ class PenjualanController extends Controller
 
     public function create()
     {
-        return view('transaksi.penjualan.create');
+        $barangData = $this->barangService->getAll();
+        return view('transaksi.penjualan.create', compact('barangData'));
     }
 
     public function edit(int $id)
@@ -91,6 +91,7 @@ class PenjualanController extends Controller
                     'error' => $e->getMessage(),
                 ]);
         } catch (Exception $e) {
+            dd($e);
             return redirect()
                 ->back()
                 ->withErrors([
