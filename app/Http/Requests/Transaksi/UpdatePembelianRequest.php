@@ -22,13 +22,9 @@ class UpdatePembelianRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tanggal_transaksi' => 'sometimes|required|date',
-            'jenis_transaksi' => 'sometimes|required|string',
             'harga' => 'sometimes|required|numeric',
             'jumlah' => 'sometimes|required|integer',
             'barang_id' => 'sometimes|required|exists:barang,id',
-            'user_id' => 'sometimes|required|exists:users,id',
-            'supplier_id' => 'sometimes|required|exists:supplier,id',
         ];
     }
 }

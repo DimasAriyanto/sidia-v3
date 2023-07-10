@@ -56,25 +56,6 @@ class PenjualanController extends Controller
         return view('transaksi.penjualan.create', compact('barangData'));
     }
 
-    public function edit(int $id)
-    {
-        try {
-            $penjualan = $this->penjualanService->getById($id);
-
-            return view('transaksi.penjualan.edit', compact('penjualan'));
-        } catch (ModelNotFoundException $e) {
-            return redirect()
-                ->route('dashboard.transaksi.penjualan.index')
-                ->withErrors([
-                    'error' => $e->getMessage(),
-                ]);
-        } catch (Exception $e) {
-            return back()->withErrors([
-                'error' => 'Ada masalah saat membuka halaman!',
-            ]);
-        }
-    }
-
     public function store(StorePenjualanRequest $request)
     {
         try {
@@ -96,30 +77,6 @@ class PenjualanController extends Controller
                 ->back()
                 ->withErrors([
                     'error' => 'Gagal menambahkan transaksi penjualan',
-                ]);
-        }
-    }
-
-    public function update(UpdatePenjualanRequest $request, int $id)
-    {
-        try {
-            $data = $request->validated();
-            $this->penjualanService->update($id, $data);
-
-            return redirect()
-                ->back()
-                ->with('success', 'Transaksi penjualan berhasil diubah');
-        } catch (ModelNotFoundException $e) {
-            return redirect()
-                ->route('dashboard.transaksi.penjualan.index')
-                ->withErrors([
-                    'error' => $e->getMessage(),
-                ]);
-        } catch (Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors([
-                    'error' => 'Gagal mengubah transaksi penjualan.',
                 ]);
         }
     }

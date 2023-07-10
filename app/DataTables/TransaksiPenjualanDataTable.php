@@ -51,6 +51,7 @@ class TransaksiPenjualanDataTable extends DataTable
     public function query(Transaksi $model, PenjualanServiceInterface $penjualanService): QueryBuilder
     {
         return $model
+            ->select('transaksi.*')
             ->with(['user', 'barang'])
             ->where('jenis_transaksi', $penjualanService->getJenisTransaksi());
     }
