@@ -26,6 +26,26 @@
       max-height: 100vh;
       overflow-x: auto;
     }
+
+    @media only screen and (min-width: 1900px) {
+      .sidebar {
+        width: 280px;
+      }
+    }
+
+    @media only screen and (max-width: 1440px) {
+      .row-cols-5 > *{
+        flex: 0 0 auto;
+        width: 33%;
+      }
+    }
+
+    @media only screen and (min-width: 1440px) and (max-width: 1900px) {
+      .row-cols-5 > *{
+        flex: 0 0 auto;
+        width: 25%;
+      }
+    }
   </style>
 </head>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\RekapController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\SupplierController;
@@ -91,5 +92,9 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
             Route::put('/{id}', [PenjualanController::class, 'update'])->name('update');
             Route::delete('/{id}', [PenjualanController::class, 'destroy'])->name('destroy');
         });
+    });
+
+    Route::prefix('/rekap')->name('rekap.')->group(function () {
+        Route::get('/barang', [RekapController::class, 'barang'])->name('barang');
     });
 });

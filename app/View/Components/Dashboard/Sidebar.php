@@ -61,12 +61,8 @@ class Sidebar extends Component
                 'route' => '#',
                 'child' => [
                     [
-                        'name' => 'Pembelian',
-                        'route' => route('dashboard.transaksi.pembelian.index'),
-                    ],
-                    [
-                        'name' => 'Penjualan',
-                        'route' => route('dashboard.transaksi.penjualan.index'),
+                        'name' => 'Barang',
+                        'route' => route('dashboard.rekap.barang'),
                     ],
                 ],
             ],
