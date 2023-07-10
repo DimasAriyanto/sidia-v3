@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Transaksi;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePenjualanRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StorePenjualanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**

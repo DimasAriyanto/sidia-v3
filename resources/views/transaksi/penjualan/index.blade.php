@@ -1,6 +1,6 @@
 <x-dashboard.layout>
   <x-slot:title>
-   Manage Transaksi Penjualan 
+   Manage Transaksi Penjualan
   </x-slot>
   <x-dashboard.breadcrumb />
   <div class="card">
@@ -12,7 +12,7 @@
       @if (session()->has('success'))
         <div class="mt-2 alert alert-success">{{ session('success') }}</div>
       @endif
-      <a href="{{ route('dashboard.master.user.create') }}" class="btn btn-sm btn-primary mb-3">
+      <a href="{{ route('dashboard.transaksi.penjualan.create') }}" class="btn btn-sm btn-primary mb-3">
         <i class="fa-solid fa-plus"></i>
         Tambah
       </a>

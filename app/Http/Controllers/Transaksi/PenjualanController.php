@@ -6,6 +6,7 @@ use App\DataTables\TransaksiPenjualanDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\StorePenjualanRequest;
 use App\Http\Requests\Transaksi\UpdatePenjualanRequest;
+use App\Services\Contracts\BarangServiceInterface;
 use App\Services\Contracts\PenjualanServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -13,11 +14,17 @@ use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
-    protected $penjualanService;
+    protected PenjualanServiceInterface $penjualanService;
+    protected BarangServiceInterface $barangService;
 
-    public function __construct(PenjualanServiceInterface $penjualanService)
+    public function __construct(
+        PenjualanServiceInterface $penjualanService,
+        BarangServiceInterface $barangService
+    )
     {
         $this->penjualanService = $penjualanService;
+        $this->barangService = $barangService;
+
     }
 
     public function index(TransaksiPenjualanDataTable $dataTable)
