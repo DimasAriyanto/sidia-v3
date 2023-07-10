@@ -20,4 +20,6 @@ interface PembelianServiceInterface
     public function getJenisTransaksi(): string;
 
     public function getMonthlyTransaction(): Collection;
+
+    public function getTotalTransaction(): Transaksi;
 }

@@ -5,8 +5,9 @@
         <div class="card" style="width: 18rem;">
           <div class="card-body row col-12 align-items-center">
             <div class="col-10">
-              <h5>{{ $item['count'] }}</h5>
-              <p class="card-text">{{ $item['name'] }}</p>
+              <span class="fw-bold fs-4">{{ $item['count'] }}</span>
+              <p class="card-text fw-light">{{ $item['name'] }}</p>
+              {!! $item['link'] !!}
             </div>
             <div class="col-2 text-center">
               {!! $item['icon'] !!}
@@ -25,21 +26,8 @@
           <canvas id="line-chart-harga" width="100%"></canvas>
         </div>
         <div class="col-4">
-          <canvas id="pie-chart-harga" width="100%"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mt-4">
-    <div class="card-body">
-      <div class="col-12 row">
-        <div class="col-8">
-          <p class="fs-4">Grafik Transaksi Jumlah Pembelian & Penjualan per Bulan</p>
-          <canvas id="line-chart-jumlah" width="100%"></canvas>
-        </div>
-        <div class="col-4">
-          <canvas id="pie-chart-jumlah" width="100%"></canvas>
+          <p class="fs-4">Persentase Total Pembelian & Penjualan</p>
+          <canvas id="doughnut-chart-harga" width="100%"></canvas>
         </div>
       </div>
     </div>
@@ -54,6 +42,7 @@
       const lineChartHargaCtx = document
         .getElementById('line-chart-harga')
         .getContext('2d')
+
       new Chart(lineChartHargaCtx, {
         type: 'line',
         data: {
@@ -70,66 +59,32 @@
         },
       })
 
-      const lineChartJumlahCtx = document
-        .getElementById('line-chart-jumlah')
+      const doughnutChartData = {{ Js::from($doughnutChartData) }}
+      const doughnutChartCtx = document
+        .getElementById('doughnut-chart-harga')
         .getContext('2d')
-      new Chart(lineChartJumlahCtx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-              label: 'Total Jumlah Pembelian',
-              data: lineChartData.pembelian.jumlah
-            },
-            {
-              label: 'Total Jumlah Penjualan',
-              data: lineChartData.penjualan.jumlah
-            },
-          ]
-        },
-      })
 
-      const pieChartData = {
-        labels: labels,
-        datasets: [{
-          label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+      new Chart(doughnutChartCtx, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            'Penjualan',
+            'Pembelian',
           ],
-          borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
-          ],
-          borderWidth: 1
-        }]
-      };
-      const pieChartConfig = {
-        type: 'bar',
-        data: pieChartData,
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        },
-      };
-      const pieChartCtx = document
-        .getElementById('pie-chart')
-        .getContext('2d')
-      const pieChart = new Chart(pieChartCtx, pieChartConfig)
+          datasets: [{
+            label: 'Total Harga',
+            data: [
+              doughnutChartData.penjualan.total,
+              doughnutChartData.pembelian.total,
+            ],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+            ],
+            hoverOffset: 4
+          }]
+        }
+      })
     </script>
   @endpush
 </x-dashboard.layout>

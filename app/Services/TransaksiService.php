@@ -17,6 +17,11 @@ class TransaksiService implements TransaksiServiceInterface
 
     public function getMonthlyTransaction(): Collection
     {
-        return $this->repository->getMonthlyTransaction();
+        return $this->repository->getMonthlyTransaction()->get();
+    }
+
+    public function getTotalTransaction(): Collection
+    {
+        return $this->repository->getTotalTransaction()->get();
     }
 }

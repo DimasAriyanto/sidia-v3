@@ -55,6 +55,21 @@ class Sidebar extends Component
                     ],
                 ],
             ],
+            [
+                'name' => 'Rekap',
+                'icon' => 'fa-solid fa-file-lines',
+                'route' => '#',
+                'child' => [
+                    [
+                        'name' => 'Pembelian',
+                        'route' => route('dashboard.transaksi.pembelian.index'),
+                    ],
+                    [
+                        'name' => 'Penjualan',
+                        'route' => route('dashboard.transaksi.penjualan.index'),
+                    ],
+                ],
+            ],
         ];
     }
 

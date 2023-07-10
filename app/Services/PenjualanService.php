@@ -65,7 +65,10 @@ class PenjualanService implements PenjualanServiceInterface
 
     public function getMonthlyTransaction(): Collection
     {
-        $pembelianMonthlyTransaction = $this->transaksiRepository->getMonthlyTransaction($this->getJenisTransaksi());
+        $pembelianMonthlyTransaction = $this->transaksiRepository->getMonthlyTransaction();
+        $pembelianMonthlyTransaction->where('jenis_transaksi', $this->getJenisTransaksi());
+
+        $pembelianMonthlyTransaction = $pembelianMonthlyTransaction->get();
 
         $availableMonths = $pembelianMonthlyTransaction->pluck('bulan')->toArray();
         $remainingMonths = array_diff(range(1, 12), $availableMonths);
@@ -85,5 +88,14 @@ class PenjualanService implements PenjualanServiceInterface
             });
 
         return $pembelianMonthlyTransaction;
+    }
+
+    public function getTotalTransaction(): Transaksi
+    {
+        return $this
+            ->transaksiRepository
+            ->getTotalTransaction()
+            ->where('jenis_transaksi', '=', $this->getJenisTransaksi())
+            ->first();
     }
 }

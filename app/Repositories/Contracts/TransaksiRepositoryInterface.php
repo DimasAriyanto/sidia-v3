@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Transaksi\Transaksi;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 interface TransaksiRepositoryInterface
@@ -17,5 +18,7 @@ interface TransaksiRepositoryInterface
 
     public function delete(Transaksi $transaksi): bool;
 
-    public function getMonthlyTransaction(string $jenisTransaksi = ''): Collection;
+    public function getTotalTransaction(): Builder;
+
+    public function getMonthlyTransaction(): Builder;
 }

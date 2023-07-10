@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Transaksi\Transaksi;
 use App\Repositories\Contracts\TransaksiRepositoryInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +35,19 @@ class TransaksiRepository implements TransaksiRepositoryInterface
         return $transaksi->delete();
     }
 
-    public function getMonthlyTransaction(string $jenisTransaksi = ''): Collection
+    public function getTotalTransaction(): Builder
+    {
+        $builder = Transaksi::select(
+            DB::raw('sum(harga * jumlah) total'),
+            DB::raw('sum(harga) harga_total'),
+            DB::raw('sum(jumlah) jumlah_total'),
+        );
+        $builder->groupBy('jenis_transaksi');
+
+        return $builder;
+    }
+
+    public function getMonthlyTransaction(): Builder
     {
         $builder = Transaksi::query();
         $builder->select(
@@ -44,13 +57,9 @@ class TransaksiRepository implements TransaksiRepositoryInterface
             DB::raw('sum(jumlah) jumlah'),
         );
 
-        if ($jenisTransaksi !== '') {
-            $builder->where('jenis_transaksi', '=', $jenisTransaksi);
-        }
-
         $builder->groupBy('jenis_transaksi', DB::raw('month(tanggal_transaksi)'));
         $builder->orderByRaw('month(tanggal_transaksi)');
 
-        return $builder->get();
+        return $builder;
     }
 }
