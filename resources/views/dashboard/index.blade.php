@@ -1,7 +1,8 @@
 <x-dashboard.layout>
-  <div class="row row-cols-1 row-cols-md-5 gd-4">
+  <x-dashboard.breadcrumb />
+  <div class="row row-cols-5 d-4">
     @foreach ($countData as $item)
-      <div class="col">
+      <div class="col my-2">
         <div class="card" style="width: 18rem;">
           <div class="card-body row col-12 align-items-center">
             <div class="col-10">
@@ -22,7 +23,7 @@
     <div class="card-body">
       <div class="col-12 row">
         <div class="col-8">
-          <p class="fs-4">Grafik Transaksi Harga Pembelian & Penjualan per Bulan</p>
+          <p class="fs-4">Grafik Transaksi Pembelian & Penjualan per Bulan</p>
           <canvas id="line-chart-harga" width="100%"></canvas>
         </div>
         <div class="col-4">

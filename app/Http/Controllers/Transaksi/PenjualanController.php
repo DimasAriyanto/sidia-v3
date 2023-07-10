@@ -5,23 +5,21 @@ namespace App\Http\Controllers\Transaksi;
 use App\DataTables\TransaksiPenjualanDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\StorePenjualanRequest;
-use App\Http\Requests\Transaksi\UpdatePenjualanRequest;
 use App\Services\Contracts\BarangServiceInterface;
 use App\Services\Contracts\PenjualanServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
     protected PenjualanServiceInterface $penjualanService;
+
     protected BarangServiceInterface $barangService;
 
     public function __construct(
         PenjualanServiceInterface $penjualanService,
         BarangServiceInterface $barangService,
-    )
-    {
+    ) {
         $this->penjualanService = $penjualanService;
         $this->barangService = $barangService;
     }
@@ -53,6 +51,7 @@ class PenjualanController extends Controller
     public function create()
     {
         $barangData = $this->barangService->getAll();
+
         return view('transaksi.penjualan.create', compact('barangData'));
     }
 
@@ -73,6 +72,7 @@ class PenjualanController extends Controller
                 ]);
         } catch (Exception $e) {
             dd($e);
+
             return redirect()
                 ->back()
                 ->withErrors([

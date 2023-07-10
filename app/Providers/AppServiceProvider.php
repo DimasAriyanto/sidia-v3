@@ -2,24 +2,28 @@
 
 namespace App\Providers;
 
+use App\Repositories\BarangRepository;
 use App\Repositories\Contracts\BarangRepositoryInterface;
 use App\Repositories\Contracts\SupplierRepositoryInterface;
 use App\Repositories\Contracts\TransaksiRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Repositories\BarangRepository;
 use App\Repositories\SupplierRepository;
 use App\Repositories\TransaksiRepository;
 use App\Repositories\UserRepository;
+use App\Services\BarangService;
+use App\Services\BreadcrumbService;
 use App\Services\Contracts\BarangServiceInterface;
+use App\Services\Contracts\BreadcrumbServiceInterface;
 use App\Services\Contracts\PembelianServiceInterface;
 use App\Services\Contracts\PenjualanServiceInterface;
 use App\Services\Contracts\SupplierServiceInterface;
 use App\Services\Contracts\UserServiceInterface;
-use App\Services\BarangService;
 use App\Services\PembelianService;
 use App\Services\PenjualanService;
 use App\Services\SupplierService;
 use App\Services\UserService;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TransaksiRepositoryInterface::class, TransaksiRepository::class);
         $this->app->bind(PembelianServiceInterface::class, PembelianService::class);
         $this->app->bind(PenjualanServiceInterface::class, PenjualanService::class);
+        $this->app->bind(BreadcrumbServiceInterface::class, function (Application $app) {
+            return new BreadcrumbService(Route::currentRouteName());
+        });
     }
 
     /**

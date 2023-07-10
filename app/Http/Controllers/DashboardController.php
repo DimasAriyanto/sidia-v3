@@ -22,31 +22,31 @@ class DashboardController extends Controller
                 'count' => $barangService->getAll()->count(),
                 'name' => 'Total Barang',
                 'icon' => '<i class="fa-solid fa-briefcase fs-1"></i>',
-                'link' => '<a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Barang</a>',
+                'link' => '<a href="'.route('dashboard.master.barang.index').'" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Barang</a>',
             ],
             [
                 'count' => $userService->getAll()->count(),
                 'name' => 'Total User',
                 'icon' => '<i class="fa-solid fa-user fs-1"></i>',
-                'link' => '<a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">User</a>',
+                'link' => '<a href="'.route('dashboard.master.user.index').'" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">User</a>',
             ],
             [
                 'count' => $supplierService->getAll()->count(),
                 'name' => 'Total Supplier',
                 'icon' => '<i class="fa-solid fa-parachute-box fs-1"></i>',
-                'link' => '<a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Supplier</a>',
+                'link' => '<a href="'.route('dashboard.master.supplier.index').'" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Supplier</a>',
             ],
             [
                 'count' => $pembelianService->getAll()->count(),
                 'name' => 'Total Pembelian',
                 'icon' => '<i class="fa-solid fa-cart-shopping fs-1"></i>',
-                'link' => '<a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Pembelian</a>',
+                'link' => '<a href="'.route('dashboard.transaksi.pembelian.index').'" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Pembelian</a>',
             ],
             [
                 'count' => $penjualanService->getAll()->count(),
                 'name' => 'Total Penjualan',
                 'icon' => '<i class="fa-solid fa-store fs-1"></i>',
-                'link' => '<a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Penjualan</a>',
+                'link' => '<a href="'.route('dashboard.transaksi.penjualan.index').'" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Penjualan</a>',
             ],
         ];
 
