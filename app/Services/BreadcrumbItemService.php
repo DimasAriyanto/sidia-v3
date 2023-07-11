@@ -68,15 +68,18 @@ class BreadcrumbItemService implements BreadcrumbItemServiceInterface
         return $this->route;
     }
 
+    public function getRouteName(): string
+    {
+        return $this->routeName;
+    }
+
     public function toArray(): array
     {
-        $data = [];
-
-        $data['name'] = $this->getName();
-        $data['icon'] = $this->getIcon();
-        $data['route'] = $this->getRoute();
-        $data['active'] = Route::currentRouteName() == $this->routeName;
-
-        return $data;
+        return [
+            'name' => $this->getName(),
+            'icon' => $this->getIcon(),
+            'route' => $this->getRoute(),
+            'active' => Route::currentRouteName() == $this->getRouteName(),
+        ];
     }
 }

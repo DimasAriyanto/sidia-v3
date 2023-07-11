@@ -30,7 +30,7 @@ class BreadcrumbService implements BreadcrumbServiceInterface
     public function registerUsing(string $route, string $existingRoute): BreadcrumbService
     {
         if (! isset($this->mappingRoute[$existingRoute])) {
-            throw new Exception(sprintf('route %s tidak ter-registrasi di breadcrumb', $existingRoute));
+            throw new Exception(sprintf('route %s tidak terdaftar di breadcrumb', $existingRoute));
         }
 
         if (! isset($this->mappingRoute[$route])) {
@@ -45,7 +45,7 @@ class BreadcrumbService implements BreadcrumbServiceInterface
     public function resolve(): array
     {
         if (! isset($this->mappingRoute[$this->currentRoute])) {
-            throw new Exception(sprintf('route %s tidak ter-registrasi di breadcrumb', $this->currentRoute));
+            return [];
         }
 
         return array_map(

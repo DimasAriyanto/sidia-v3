@@ -22,5 +22,7 @@ interface BreadcrumbItemServiceInterface
 
     public function getRoute(): string;
 
+    public function getRouteName(): string;
+
     public function toArray(): array;
 }
