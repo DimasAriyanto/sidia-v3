@@ -40,6 +40,14 @@ class Breadcrumb extends Component
                 ->addRoute('dashboard.master.user.index')
         );
 
+        $breadcrumbService->registerUsing('dashboard.master.user.create', 'dashboard.master.user.index');
+        $breadcrumbService->register(
+            'dashboard.master.user.create',
+            BreadcrumbItemService::make()
+                ->addName('Create User')
+                ->addRoute('dashboard.master.user.create')
+        );
+
         $breadcrumbService->registerUsing('dashboard.master.user.show', 'dashboard.master.user.index');
         $breadcrumbService->register(
             'dashboard.master.user.show',
@@ -74,6 +82,14 @@ class Breadcrumb extends Component
                 ->addRouteWithParameters('dashboard.master.barang.show')
         );
 
+        $breadcrumbService->registerUsing('dashboard.master.barang.create', 'dashboard.master.barang.index');
+        $breadcrumbService->register(
+            'dashboard.master.barang.create',
+            BreadcrumbItemService::make()
+                ->addName('Create Barang')
+                ->addRoute('dashboard.master.barang.create')
+        );
+
         $breadcrumbService->registerUsing('dashboard.master.barang.edit', 'dashboard.master.barang.index');
         $breadcrumbService->register(
             'dashboard.master.barang.edit',
@@ -98,6 +114,14 @@ class Breadcrumb extends Component
             BreadcrumbItemService::make()
                 ->addName('Detail Supplier')
                 ->addRouteWithParameters('dashboard.master.supplier.show')
+        );
+
+        $breadcrumbService->registerUsing('dashboard.master.supplier.create', 'dashboard.master.supplier.index');
+        $breadcrumbService->register(
+            'dashboard.master.supplier.create',
+            BreadcrumbItemService::make()
+                ->addName('Create Supplier')
+                ->addRoute('dashboard.master.supplier.create')
         );
 
         $breadcrumbService->registerUsing('dashboard.master.supplier.edit', 'dashboard.master.supplier.index');
@@ -129,6 +153,14 @@ class Breadcrumb extends Component
                 ->addRouteWithParameters('dashboard.transaksi.pembelian.show')
         );
 
+        $breadcrumbService->registerUsing('dashboard.transaksi.pembelian.create', 'dashboard.transaksi.pembelian.index');
+        $breadcrumbService->register(
+            'dashboard.transaksi.pembelian.create',
+            BreadcrumbItemService::make()
+                ->addName('Input Transaksi Pembelian')
+                ->addRoute('dashboard.transaksi.pembelian.create')
+        );
+
         // Transaksi Penjualan
         $breadcrumbService->registerUsing('dashboard.transaksi.penjualan.index', 'dashboard.index');
         $breadcrumbService->register('dashboard.transaksi.penjualan.index', $breadcrumbItemTransaksi);
@@ -145,6 +177,14 @@ class Breadcrumb extends Component
             BreadcrumbItemService::make()
                 ->addName('Detail Transaksi Penjualan')
                 ->addRouteWithParameters('dashboard.transaksi.penjualan.show')
+        );
+
+        $breadcrumbService->registerUsing('dashboard.transaksi.penjualan.create', 'dashboard.transaksi.penjualan.index');
+        $breadcrumbService->register(
+            'dashboard.transaksi.penjualan.create',
+            BreadcrumbItemService::make()
+                ->addName('Input Transaksi Penjualan')
+                ->addRoute('dashboard.transaksi.penjualan.create')
         );
 
         $this->breadcrumb = $breadcrumbService->resolve();
