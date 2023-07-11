@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Services\Contracts\BreadcrumbServiceInterface;
 use Exception;
+use Illuminate\Routing\Route;
 
 class BreadcrumbService implements BreadcrumbServiceInterface
 {
@@ -11,9 +12,9 @@ class BreadcrumbService implements BreadcrumbServiceInterface
 
     protected array $mappingRoute = [];
 
-    public function __construct(string $currentRoute = '')
+    public function __construct(Route $route)
     {
-        $this->currentRoute = $currentRoute;
+        $this->currentRoute = $route->getName();
     }
 
     public function register(string $route, BreadcrumbItemService $breadcrumbItem): BreadcrumbService
