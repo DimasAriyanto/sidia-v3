@@ -49,7 +49,10 @@
             <i class="fa-solid fa-floppy-disk"></i>
             Simpan
           </button>
-        <a href="{{ route('dashboard.master.supplier.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
+        <a href="{{ route('dashboard.master.supplier.index') }}" class="text-white btn btn-sm btn-info mx-2">
+            <i class="fa-solid fa-backward"></i>
+            Kembali
+        </a>
       </form>
     </div>
       </div>

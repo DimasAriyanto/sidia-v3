@@ -38,10 +38,13 @@
           <button type="submit" class="btn btn-sm btn-primary">
             <i class="fa-solid fa-floppy-disk"></i>
             Simpan
-          </button>
-        <a href="{{ route('dashboard.master.barang.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
-      </form>
-    </div>
+        </button>
+        <a href="{{ route('dashboard.master.barang.index') }}" class="text-white btn btn-sm btn-info mx-2">
+            <i class="fa-solid fa-backward"></i>
+            Kembali
+        </a>
+        </form>
+        </div>
       </div>
     </div>
 </x-dashboard.layout>

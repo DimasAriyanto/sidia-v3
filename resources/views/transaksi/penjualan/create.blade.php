@@ -47,8 +47,14 @@
                             </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                <a href="{{ route('dashboard.transaksi.penjualan.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Simpan
+                    </button>
+                <a href="{{ route('dashboard.transaksi.penjualan.index') }}" class="text-white btn btn-sm btn-info mx-2">
+                    <i class="fa-solid fa-backward"></i>
+                    Kembali
+                </a>
                 </form>
             </div>
         </div>
