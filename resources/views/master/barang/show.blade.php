@@ -35,7 +35,8 @@
             <table class="table w-100 table-bordered" id="table-history-transaksi">
               <thead>
                 <tr>
-                  <td>Tanggal</td>
+                  <td width="20%">Tanggal</td>
+                  <td width="15%">Jam (Waktu Server)</td>
                   <td>Harga</td>
                   <td>Jumlah</td>
                   <td>Jenis Transaksi</td>
@@ -57,11 +58,13 @@
         const tableHistoryTransaksi = $('#table-history-transaksi')
         tableHistoryTransaksi.DataTable({
           ajax: "{{ route('api.master.barang.history_transaksi.datatable', ['barangId' => $barang->id]) }}",
+          ordering: false,
           columns: [
-            {data: 'tanggal_transaksi'},
-            {data: 'harga', render: harga => format_number(harga, 2), className: 'text-end'},
+            {data: 'tanggal_transaksi', render: toIndonesianDateTanggal},
+            {data: 'tanggal_transaksi', render: toIndonesianDateWaktu},
+            {data: 'harga', render: harga => formatNumber(harga, 2), className: 'text-end'},
             {data: 'jumlah'},
-            {data: 'jenis_transaksi', render: jenis_transaksi => ucfirst(jenis_transaksi)},
+            {data: 'jenis_transaksi', render: ucfirst},
           ],
           createdRow: (tr, data) => {
             if (data.jenis_transaksi == 'pembelian') {

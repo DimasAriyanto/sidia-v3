@@ -93,7 +93,7 @@ class TransaksiPembelianDataTable extends DataTable
                 ->title('Jumlah'),
             Column::make('harga')
                 ->title('Harga')
-                ->render('format_number(data, 2)')
+                ->render('formatNumber(data, 2)')
                 ->className('text-end'),
             Column::make('supplier.nama')
                 ->title('Supplier'),
