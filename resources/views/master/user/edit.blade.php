@@ -75,16 +75,16 @@
               </div>
             @enderror
           </div>
+          <div class="my-4"></div>
           <button type="submit" class="btn btn-sm btn-primary">
             <i class="fa-solid fa-floppy-disk"></i>
             Simpan
           </button>
+          <a href="{{ route('dashboard.master.user.index') }}" class="text-white btn btn-sm btn-info mx-2">
+            <i class="fa-solid fa-backward"></i>
+            Kembali
+          </a>
         </form>
-        <hr>
-        <a href="{{ route('dashboard.master.user.index') }}" class="text-white btn btn-sm btn-info">
-          <i class="fa-solid fa-backward"></i>
-          Kembali
-        </a>
       </div>
     </div>
 </x-dashboard.layout>

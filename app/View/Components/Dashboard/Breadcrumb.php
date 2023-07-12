@@ -159,25 +159,36 @@ class Breadcrumb extends Component
         $breadcrumbService
             ->registerUsing('dashboard.transaksi.penjualan.index', 'dashboard.index')
             ->register('dashboard.transaksi.penjualan.index', $breadcrumbItemTransaksi)
-            ->register(
-                'dashboard.transaksi.penjualan.index',
+            ->register('dashboard.transaksi.penjualan.index',
                 BreadcrumbItemService::make()
                     ->addName('Penjualan')
                     ->addRoute('dashboard.transaksi.penjualan.index')
             )
             ->registerUsing('dashboard.transaksi.penjualan.show', 'dashboard.transaksi.penjualan.index')
-            ->register(
-                'dashboard.transaksi.penjualan.show',
+            ->register('dashboard.transaksi.penjualan.show',
                 BreadcrumbItemService::make()
                     ->addName('Detail Transaksi Penjualan')
                     ->addRouteWithParameters('dashboard.transaksi.penjualan.show')
             )
             ->registerUsing('dashboard.transaksi.penjualan.create', 'dashboard.transaksi.penjualan.index')
-            ->register(
-                'dashboard.transaksi.penjualan.create',
+            ->register('dashboard.transaksi.penjualan.create',
                 BreadcrumbItemService::make()
                     ->addName('Input Transaksi Penjualan')
                     ->addRoute('dashboard.transaksi.penjualan.create')
+            );
+
+        // Rekap barang
+        $breadcrumbService
+            ->registerUsing('dashboard.rekap.barang', 'dashboard.index')
+            ->register('dashboard.rekap.barang',
+                BreadcrumbItemService::make()
+                    ->addName('Rekap')
+                    ->addIcon('fa-solid fa-file-lines')
+            )
+            ->register('dashboard.rekap.barang',
+                BreadcrumbItemService::make()
+                    ->addName('Rekap Barang')
+                    ->addRoute('dashboard.rekap.barang')
             );
 
         $this->breadcrumb = $breadcrumbService->resolve();

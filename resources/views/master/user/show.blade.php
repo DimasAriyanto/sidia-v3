@@ -33,11 +33,12 @@
             <label for="updated_at" class="form-label">Tanggal Diupdate</label>
             <input type="text" readonly class="form-control" id="updated_at" value="{{ $user->updated_at }}">
           </div>
+          <div class="my-4"></div>
+          <a href="{{ route('dashboard.master.user.index') }}" class="text-white btn btn-sm btn-info">
+            <i class="fa-solid fa-backward"></i>
+            Kembali
+          </a>
         </form>
-        <a href="{{ route('dashboard.master.user.index') }}" class="text-white btn btn-sm btn-info">
-          <i class="fa-solid fa-backward"></i>
-          Kembali
-        </a>
       </div>
     </div>
 </x-dashboard.layout>
