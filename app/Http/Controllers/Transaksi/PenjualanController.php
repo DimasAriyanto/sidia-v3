@@ -59,6 +59,15 @@ class PenjualanController extends Controller
     {
         try {
             $data = $request->validated();
+
+            if (! $this->penjualanService->checkStockIsAvailable($data['barang_id'], $data['jumlah'])) {
+                return redirect()
+                    ->back()
+                    ->withErrors([
+                        'jumlah' => ['Jumlah penjualan melebihi kapasitas stok !'],
+                    ]);
+            }
+
             $this->penjualanService->create($data);
 
             return redirect()
@@ -71,7 +80,6 @@ class PenjualanController extends Controller
                     'error' => $e->getMessage(),
                 ]);
         } catch (Exception $e) {
-            dd($e);
 
             return redirect()
                 ->back()

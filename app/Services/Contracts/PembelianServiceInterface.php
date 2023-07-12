@@ -21,5 +21,5 @@ interface PembelianServiceInterface
 
     public function getMonthlyTransaction(): Collection;
 
-    public function getTotalTransaction(): Transaksi;
+    public function getTotalTransaction(): float;
 }

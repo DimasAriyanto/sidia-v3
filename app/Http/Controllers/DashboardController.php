@@ -84,10 +84,10 @@ class DashboardController extends Controller
 
         $doughnutChartData = [
             'pembelian' => [
-                'total' => $pembelianTotalTranasction->total,
+                'total' => $pembelianTotalTranasction,
             ],
             'penjualan' => [
-                'total' => $penjualanTotalTransaction->total,
+                'total' => $penjualanTotalTransaction,
             ],
         ];
 

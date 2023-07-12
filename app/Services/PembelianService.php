@@ -89,12 +89,17 @@ class PembelianService implements PembelianServiceInterface
         return $pembelianMonthlyTransaction;
     }
 
-    public function getTotalTransaction(): Transaksi
+    public function getTotalTransaction(): float
     {
-        return $this
-            ->transaksiRepository
+        $transaksi = $this->transaksiRepository
             ->getTotalTransaction()
             ->where('jenis_transaksi', '=', $this->getJenisTransaksi())
             ->first();
+
+        if (! $transaksi) {
+            return 0;
+        }
+
+        return $transaksi->total;
     }
 }

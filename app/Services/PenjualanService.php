@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Transaksi\Transaksi;
+use App\Repositories\Contracts\BarangRepositoryInterface;
 use App\Repositories\Contracts\TransaksiRepositoryInterface;
 use App\Services\Contracts\PenjualanServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,11 +14,16 @@ class PenjualanService implements PenjualanServiceInterface
 {
     protected TransaksiRepositoryInterface $transaksiRepository;
 
+    protected BarangRepositoryInterface $barangRepository;
+
     protected string $jenisTransaksi = 'penjualan';
 
-    public function __construct(TransaksiRepositoryInterface $transaksiRepository)
-    {
+    public function __construct(
+        TransaksiRepositoryInterface $transaksiRepository,
+        BarangRepositoryInterface $barangRepository
+    ) {
         $this->transaksiRepository = $transaksiRepository;
+        $this->barangRepository = $barangRepository;
     }
 
     public function getAll(): Collection
@@ -91,12 +97,24 @@ class PenjualanService implements PenjualanServiceInterface
         return $pembelianMonthlyTransaction;
     }
 
-    public function getTotalTransaction(): Transaksi
+    public function getTotalTransaction(): float
     {
-        return $this
-            ->transaksiRepository
+        $transaksi = $this->transaksiRepository
             ->getTotalTransaction()
             ->where('jenis_transaksi', '=', $this->getJenisTransaksi())
             ->first();
+
+        if (! $transaksi) {
+            return 0;
+        }
+
+        return $transaksi->total;
+    }
+
+    public function checkStockIsAvailable(int $barangId, int $jumlahJual): bool
+    {
+        $barang = $this->barangRepository->getById($barangId);
+
+        return $barang->stok >= $jumlahJual;
     }
 }

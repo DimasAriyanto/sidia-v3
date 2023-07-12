@@ -1,6 +1,6 @@
 <x-dashboard.layout>
   <x-dashboard.breadcrumb />
-  <div class="row row-cols-5 d-4">
+  <div class="row row-col-5 d-4">
     @foreach ($countData as $item)
       <div class="col my-2">
         <div class="card" style="width: 18rem;">

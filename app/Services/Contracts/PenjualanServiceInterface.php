@@ -21,5 +21,7 @@ interface PenjualanServiceInterface
 
     public function getMonthlyTransaction(): Collection;
 
-    public function getTotalTransaction(): Transaksi;
+    public function getTotalTransaction(): float;
+
+    public function checkStockIsAvailable(int $barangId, int $jumlahJual): bool;
 }
