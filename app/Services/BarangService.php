@@ -4,17 +4,24 @@ namespace App\Services;
 
 use App\Models\Master\Barang;
 use App\Repositories\Contracts\BarangRepositoryInterface;
+use App\Repositories\Contracts\TransaksiRepositoryInterface;
 use App\Services\Contracts\BarangServiceInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BarangService implements BarangServiceInterface
 {
-    protected $barangRepository;
+    protected BarangRepositoryInterface $barangRepository;
 
-    public function __construct(BarangRepositoryInterface $barangRepository)
-    {
+    protected TransaksiRepositoryInterface $transaksiRepository;
+
+    public function __construct(
+        BarangRepositoryInterface $barangRepository,
+        TransaksiRepositoryInterface $transaksiRepository
+    ) {
         $this->barangRepository = $barangRepository;
+        $this->transaksiRepository = $transaksiRepository;
     }
 
     public function getAll(): Collection
@@ -40,6 +47,13 @@ class BarangService implements BarangServiceInterface
         }
 
         return $barang;
+    }
+
+    public function getHistoryTransaksiBuilder(int $id): Builder
+    {
+        $barang = $this->getById($id);
+
+        return $this->transaksiRepository->getBarangHistoryTransaksi($barang);
     }
 
     public function create(array $data): Barang

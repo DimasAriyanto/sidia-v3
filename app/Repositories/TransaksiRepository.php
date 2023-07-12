@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Master\Barang;
 use App\Models\Transaksi\Transaksi;
 use App\Repositories\Contracts\TransaksiRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,5 +62,11 @@ class TransaksiRepository implements TransaksiRepositoryInterface
         $builder->orderByRaw('month(tanggal_transaksi)');
 
         return $builder;
+    }
+
+    public function getBarangHistoryTransaksi(Barang $barang): Builder
+    {
+        return Transaksi::where('barang_id', $barang->id)
+            ->orderByDesc('tanggal_transaksi');
     }
 }

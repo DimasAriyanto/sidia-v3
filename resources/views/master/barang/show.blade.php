@@ -28,10 +28,49 @@
             <input type="text" readonly class="form-control" id="updated_at" value="{{ $barang->updated_at }}">
           </div>
         </form>
+
+        <div class="card my-3">
+          <div class="card-header bg-primary fw-bold text-light">Histori Transaksi</div>
+          <div class="card-body">
+            <table class="table w-100 table-bordered" id="table-history-transaksi">
+              <thead>
+                <tr>
+                  <td>Tanggal</td>
+                  <td>Harga</td>
+                  <td>Jumlah</td>
+                  <td>Jenis Transaksi</td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+
         <a href="{{ route('dashboard.master.barang.index') }}" class="text-white btn btn-sm btn-info">
           <i class="fa-solid fa-backward"></i>
           Kembali
         </a>
       </div>
     </div>
+
+    @push('scripts')
+      <script>
+        const tableHistoryTransaksi = $('#table-history-transaksi')
+        tableHistoryTransaksi.DataTable({
+          ajax: "{{ route('api.master.barang.history_transaksi.datatable', ['barangId' => $barang->id]) }}",
+          columns: [
+            {data: 'tanggal_transaksi'},
+            {data: 'harga', render: harga => format_number(harga, 2), className: 'text-end'},
+            {data: 'jumlah'},
+            {data: 'jenis_transaksi', render: jenis_transaksi => ucfirst(jenis_transaksi)},
+          ],
+          createdRow: (tr, data) => {
+            if (data.jenis_transaksi == 'pembelian') {
+              $(tr).addClass('table-success')
+            } else if (data.jenis_transaksi == 'penjualan') {
+              $(tr).addClass('table-danger')
+            }
+          }
+        })
+      </script>
+    @endpush
 </x-dashboard.layout>

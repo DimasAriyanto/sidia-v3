@@ -3,6 +3,7 @@
 namespace App\Services\Contracts;
 
 use App\Models\Master\Barang;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 interface BarangServiceInterface
@@ -12,6 +13,8 @@ interface BarangServiceInterface
     public function getById(int $id): Barang;
 
     public function getByName(string $name): Barang;
+
+    public function getHistoryTransaksiBuilder(int $id): Builder;
 
     public function create(array $data): Barang;
 

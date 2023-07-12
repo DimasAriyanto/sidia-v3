@@ -7,7 +7,7 @@
       <tr>
         <th rowspan="3">Nama Barang</th>
         <th colspan="4">Transaksi</th>
-        <th colspan="2">Total</th>
+        <th colspan="2">Total Perhitungan</th>
       </tr>
       <tr>
         <th colspan="2">Pembelian</th>
