@@ -66,7 +66,8 @@ class TransaksiRepository implements TransaksiRepositoryInterface
 
     public function getBarangHistoryTransaksi(Barang $barang): Builder
     {
-        return Transaksi::where('barang_id', $barang->id)
+        return Transaksi::select('*', DB::raw('harga * jumlah as total'))
+            ->where('barang_id', $barang->id)
             ->orderByDesc('tanggal_transaksi');
     }
 }

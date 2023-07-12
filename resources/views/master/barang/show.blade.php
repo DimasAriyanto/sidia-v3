@@ -39,6 +39,7 @@
                   <td width="15%">Jam (Waktu Server)</td>
                   <td>Harga</td>
                   <td>Jumlah</td>
+                  <td>Total</td>
                   <td>Jenis Transaksi</td>
                 </tr>
               </thead>
@@ -64,6 +65,7 @@
             {data: 'tanggal_transaksi', render: toIndonesianDateWaktu},
             {data: 'harga', render: harga => formatNumber(harga, 2), className: 'text-end'},
             {data: 'jumlah'},
+            {data: 'total', render: total => formatNumber(total, 2), className: 'text-end'},
             {data: 'jenis_transaksi', render: ucfirst},
           ],
           createdRow: (tr, data) => {
