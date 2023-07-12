@@ -92,6 +92,8 @@ class BarangDataTable extends DataTable
                 ->title('Nama'),
             Column::make('satuan')
                 ->title('Satuan'),
+            Column::make('stok')
+                ->title('Stok'),
             Column::make('action')
                 ->title('Action')
                 ->width('20%')

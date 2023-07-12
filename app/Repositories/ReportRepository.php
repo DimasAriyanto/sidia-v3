@@ -2,6 +2,55 @@
 
 namespace App\Repositories;
 
-class ReportRepository
+use App\Repositories\Contracts\ReportRepositoryInterface;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
+
+class ReportRepository implements ReportRepositoryInterface
 {
+    public function getRekapBarang(): Builder
+    {
+        $sql = "
+      select b.id, b.nama as nama_barang, sum(
+      	case when t.jenis_transaksi = 'pembelian' 
+      	then t.harga
+      	else 0 end 
+      ) harga_pembelian,
+      sum(
+      	case when t.jenis_transaksi = 'penjualan' 
+      	then t.harga
+      	else 0 end 
+      ) harga_penjualan,
+      sum(
+      	case when t.jenis_transaksi = 'pembelian' 
+      	then t.jumlah
+      	else 0 end 
+      ) jumlah_pembelian,
+      sum(
+      	case when t.jenis_transaksi = 'penjualan' 
+      	then t.jumlah
+      	else 0 end 
+      ) jumlah_penjualan,
+      sum(
+        case when t.jenis_transaksi = 'penjualan'
+        then -t.harga
+        when t.jenis_transaksi = 'pembelian'
+        then t.harga
+        end
+      ) total_harga,
+      sum(
+        case when t.jenis_transaksi = 'penjualan'
+        then -t.jumlah
+        when t.jenis_transaksi = 'pembelian'
+        then t.jumlah
+        end
+      ) total_jumlah
+      from barang b
+      left join transaksi t on t.barang_id = b.id
+      group by b.id, b.nama
+      order by b.nama
+    ";
+
+        return DB::table(DB::raw('('.$sql.') as foo'));
+    }
 }

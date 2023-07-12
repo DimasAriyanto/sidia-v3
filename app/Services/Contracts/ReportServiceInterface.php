@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 interface ReportServiceInterface
 {
-    public function getMonthlyTransaction(): Collection;
-
-    public function getTotalTransaction(): Collection;
-
     public function getRekapBarang(): Collection;
 }
