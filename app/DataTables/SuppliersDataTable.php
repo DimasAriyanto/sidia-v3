@@ -40,7 +40,7 @@ class SuppliersDataTable extends DataTable
               <form action="$deleteAction" method="post" class="d-inline">
                 $csrf
                 $methodDelete
-                <button type="submit" class="btn btn-sm btn-danger text-white">
+                <button type="submit" onclick="alertDeleteForm(event)" class="btn btn-sm btn-danger text-white">
                   <i class="fa-solid fa-trash"></i>
                   Delete
                 </button>

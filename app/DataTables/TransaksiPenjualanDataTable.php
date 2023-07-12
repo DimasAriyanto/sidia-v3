@@ -36,7 +36,7 @@ class TransaksiPenjualanDataTable extends DataTable
               <form action="$deleteAction" method="post" class="d-inline">
                 $csrf
                 $methodDelete
-                <button type="submit" class="btn btn-sm btn-danger text-white">
+                <button type="submit" onclick="alertDeleteForm(event)" class="btn btn-sm btn-danger text-white">
                   <i class="fa-solid fa-trash"></i>
                   Delete
                 </button>
@@ -92,7 +92,9 @@ class TransaksiPenjualanDataTable extends DataTable
             Column::make('jumlah')
                 ->title('Jumlah'),
             Column::make('harga')
-                ->title('Harga'),
+                ->title('Harga')
+                ->render('format_number(data, 2)')
+                ->className('text-end'),
             Column::make('tanggal_transaksi')
                 ->title('Tanggal Transaksi'),
             Column::make('user.nama')

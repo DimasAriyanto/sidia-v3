@@ -139,7 +139,7 @@ class UserController extends Controller
             return redirect()
                 ->back()
                 ->withErrors([
-                    'error' => 'Gagal menghapus user.',
+                    'error' => $e->getMessage(),
                 ]);
         }
     }

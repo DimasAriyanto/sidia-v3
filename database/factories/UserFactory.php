@@ -34,4 +34,11 @@ class UserFactory extends Factory
             'user_type' => 'admin',
         ]);
     }
+
+    public function operator(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => 'operator',
+        ]);
+    }
 }
