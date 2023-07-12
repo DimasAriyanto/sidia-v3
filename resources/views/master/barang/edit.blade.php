@@ -39,12 +39,9 @@
             <i class="fa-solid fa-floppy-disk"></i>
             Simpan
           </button>
-        </form>
-        <hr>
-        <a href="{{ route('dashboard.master.barang.index') }}" class="text-white btn btn-sm btn-info">
-          <i class="fa-solid fa-backward"></i>
-          Kembali
-        </a>
+        <a href="{{ route('dashboard.master.barang.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
+      </form>
+    </div>
       </div>
     </div>
 </x-dashboard.layout>
