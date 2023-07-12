@@ -23,11 +23,11 @@
     <div class="card-body">
       <div class="col-12 row">
         <div class="col-8">
-          <p class="fs-4">Grafik Transaksi Pembelian & Penjualan per Bulan</p>
+          <p class="fs-4">Pembelian & Penjualan per Bulan</p>
           <canvas id="line-chart-harga" width="100%"></canvas>
         </div>
         <div class="col-4">
-          <p class="fs-4">Persentase Total Pembelian & Penjualan</p>
+          <p class="fs-4">Perbandingan Pembelian & Penjualan</p>
           <canvas id="doughnut-chart-harga" width="100%"></canvas>
         </div>
       </div>
