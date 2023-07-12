@@ -61,10 +61,9 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                    <a href="{{ route('dashboard.transaksi.pembelian.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
                 </form>
-                <hr>
-                <a href="{{ route('dashboard.transaksi.pembelian.index') }}"
-                    class="text-white btn btn-sm btn-info">Kembali</a>
+            </div>
             </div>
         </div>
 

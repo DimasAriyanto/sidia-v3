@@ -42,9 +42,9 @@
           @enderror
         </div>
         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+      <a href="{{ route('dashboard.master.supplier.index') }}" class="text-white btn btn-sm btn-info mx-2">Kembali</a>
       </form>
-      <hr>
-      <a href="{{ route('dashboard.master.supplier.index') }}" class="text-white btn btn-sm btn-info">Kembali</a>
+    </div>
     </div>
   </div>
 </x-dashboard.layout>
