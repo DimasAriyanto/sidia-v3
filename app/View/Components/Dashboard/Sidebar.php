@@ -25,6 +25,7 @@ class Sidebar extends Component
                 'name' => 'Master',
                 'icon' => 'fa-solid fa-layer-group',
                 'route' => '#',
+                'role' => ['admin'],
                 'child' => [
                     [
                         'name' => 'Pengguna',
@@ -59,6 +60,7 @@ class Sidebar extends Component
                 'name' => 'Rekap',
                 'icon' => 'fa-solid fa-file-lines',
                 'route' => '#',
+                'role' => ['admin'],
                 'child' => [
                     [
                         'name' => 'Barang',

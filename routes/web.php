@@ -28,7 +28,7 @@ Route::post('/logout', [LoginController::class, 'postLogout'])->name('auth.post-
 Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-    Route::prefix('/master')->name('master.')->group(function () {
+    Route::prefix('/master')->name('master.')->middleware('auth.admin')->group(function () {
         Route::prefix('/user')->name('user.')->group(function () {
             // View response routes
             Route::get('/', [UserController::class, 'index'])->name('index');
@@ -94,7 +94,7 @@ Route::middleware('auth')->prefix('/dashboard')->name('dashboard.')->group(funct
         });
     });
 
-    Route::prefix('/rekap')->name('rekap.')->group(function () {
+    Route::prefix('/rekap')->name('rekap.')->middleware('auth.admin')->group(function () {
         Route::get('/barang', [RekapController::class, 'barang'])->name('barang');
     });
 });

@@ -1,5 +1,8 @@
 <x-dashboard.layout>
   <x-dashboard.breadcrumb />
+  @error('error')
+    <div class="mt-2 alert alert-danger">{{ $message }}</div>
+  @enderror
   <div class="row row-col-5 d-4">
     @foreach ($countData as $item)
       <div class="col my-2">
