@@ -43,9 +43,9 @@ class ReportRepository implements ReportRepositoryInterface
       ) total_pembelian,
       sum(
         case when t.jenis_transaksi = 'penjualan'
-        then -(t.harga * t.jumlah)
-        when t.jenis_transaksi = 'pembelian'
         then (t.harga * t.jumlah)
+        when t.jenis_transaksi = 'pembelian'
+        then -(t.harga * t.jumlah)
         end
       ) total_selisih
       from barang b

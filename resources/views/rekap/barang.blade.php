@@ -7,8 +7,8 @@
       <tr>
         <th rowspan="3">Nama Barang</th>
         <th colspan="6">Transaksi</th>
-        <th rowspan="3">Selisih Beli & Jual</th>
-      </tr>
+        <th rowspan="3">Selisih Jual & Beli</th>
+      </tr> 
       <tr>
         <th colspan="3">Pembelian</th>
         <th colspan="3">Penjualan</th>
