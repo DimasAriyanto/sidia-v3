@@ -22,6 +22,11 @@ class ReportRepository implements ReportRepositoryInterface
       	else 0 end 
       ) harga_penjualan,
       sum(
+      	case when t.jenis_transaksi = 'penjualan' 
+      	then t.jumlah * t.harga
+      	else 0 end 
+      ) total_penjualan,
+      sum(
       	case when t.jenis_transaksi = 'pembelian' 
       	then t.jumlah
       	else 0 end 
@@ -32,19 +37,17 @@ class ReportRepository implements ReportRepositoryInterface
       	else 0 end 
       ) jumlah_penjualan,
       sum(
-        case when t.jenis_transaksi = 'penjualan'
-        then -t.harga
-        when t.jenis_transaksi = 'pembelian'
-        then t.harga
-        end
-      ) total_harga,
+      	case when t.jenis_transaksi = 'pembelian' 
+      	then t.harga * t.jumlah
+      	else 0 end 
+      ) total_pembelian,
       sum(
         case when t.jenis_transaksi = 'penjualan'
-        then -t.jumlah
+        then -(t.harga * t.jumlah)
         when t.jenis_transaksi = 'pembelian'
-        then t.jumlah
+        then (t.harga * t.jumlah)
         end
-      ) total_jumlah
+      ) total_selisih
       from barang b
       left join transaksi t on t.barang_id = b.id
       group by b.id, b.nama
