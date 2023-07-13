@@ -20,7 +20,7 @@ class BarangFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name(),
+            'nama' => fake()->word(),
             'satuan' => fake()->randomElement(['kilo', 'gram', 'liter', 'unit', 'lembar', 'batang', 'ekor']),
             'stok' => 0,
         ];
