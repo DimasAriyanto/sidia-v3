@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', 'dashboard');
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('auth.show-login-form');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('auth.post-login');
 Route::post('/logout', [LoginController::class, 'postLogout'])->name('auth.post-logout');
